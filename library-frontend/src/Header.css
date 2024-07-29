@@ -1,0 +1,19 @@
+/* src/Header.css */
+.header {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  position: relative;
+}
+
+.hamburger-btn {
+  font-size: 30px;
+  cursor: pointer;
+  position: absolute;
+  left: 20px;
+  top: 10px;
+  background: none;
+  border: none;
+  color: white;
+}

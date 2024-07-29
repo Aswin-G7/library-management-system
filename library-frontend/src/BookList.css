@@ -1,0 +1,23 @@
+/* src/BookList.css */
+.book-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0; /* Ensure margin does not push content */
+    padding: 16px;
+  }
+  
+  .book-card {
+    width: 150px; /* Set a consistent width for the book card */
+    margin: 16px;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .book-cover {
+    width: 150px; /* Set the width for the book cover image */
+    height: 220px; /* Set the height for the book cover image */
+    object-fit: cover; /* Ensure the image fits within the dimensions */
+  }
+  

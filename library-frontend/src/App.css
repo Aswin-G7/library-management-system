@@ -1,0 +1,14 @@
+/* src/App.css */
+.App {
+  font-family: Arial, sans-serif;
+}
+
+.content {
+  margin-left: 0px; /* Adjust this based on your sidebar width */
+  padding: 16px;
+  transition: margin-left 0.5s;
+}
+
+.sidebar.open + .content {
+  margin-left: 260px;
+}
