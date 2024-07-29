@@ -1,0 +1,38 @@
+/* src/BookDetails.css */
+.book-details {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-top: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .book-details img.book-image {
+    width: 150px; /* Adjust as needed */
+    height: auto;
+    display: block;
+    margin: 20px 0;
+  }
+  
+  .book-details h2 {
+    margin-bottom: 10px;
+  }
+  
+  .book-details .details-section {
+    margin-top: 20px;
+  }
+  
+  .book-details .details-section h3 {
+    margin-bottom: 5px;
+  }
+  
+  .book-details .details-section hr {
+    margin-bottom: 10px;
+    border: 0;
+    border-top: 1px solid #ddd;
+  }
+  
+  .book-details p {
+    margin: 5px 0;
+  }
+  
