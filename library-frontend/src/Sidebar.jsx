@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import './Sidebar.css';
 
 const Sidebar = ({ isOpen, toggleSidebar, categories, selectCategory }) => {
-  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
 
-  const toggleCategory = () => {
-    setIsCategoryOpen(!isCategoryOpen);
+  const toggleCategories = () => {
+    setIsCategoriesOpen(!isCategoriesOpen);
   };
 
   return (
@@ -15,12 +15,14 @@ const Sidebar = ({ isOpen, toggleSidebar, categories, selectCategory }) => {
         &times;
       </button>
       <ul>
-        <li>ALL</li>
-        <li onClick={toggleCategory}>CATEGORIES</li>
-        {isCategoryOpen && (
-          <ul className="dropdown">
-            {categories.map((category) => (
-              <li key={category} onClick={() => selectCategory(category)}>
+        <li onClick={() => selectCategory('')}>ALL</li>
+        <li onClick={toggleCategories} className="categories-dropdown">
+          CATEGORIES
+        </li>
+        {isCategoriesOpen && (
+          <ul className="categories-list">
+            {categories.map((category, index) => (
+              <li key={index} onClick={() => selectCategory(category)}>
                 {category}
               </li>
             ))}
