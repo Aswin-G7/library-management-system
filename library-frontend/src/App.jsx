@@ -9,9 +9,13 @@ import SearchBar from './SearchBar';
 import { books as booksData } from './booksData'; // Importing books data
 import './App.css';
 
+// Sample data for categories
+const categories = ['Spiritual', 'Self-Help'];
+
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -21,15 +25,28 @@ const App = () => {
     setSearchTerm(e.target.value);
   };
 
-  const filteredBooks = booksData.filter(book =>
-    book.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const selectCategory = (category) => {
+    setSelectedCategory(category);
+    setIsSidebarOpen(false); // Close sidebar after selecting category
+  };
+
+  const filteredBooks = booksData.filter(book => {
+    return (
+      book.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      (selectedCategory ? book.genre === selectedCategory : true)
+    );
+  });
 
   return (
     <Router>
       <div className="App">
         <Header toggleSidebar={toggleSidebar} />
-        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+        <Sidebar
+          isOpen={isSidebarOpen}
+          toggleSidebar={toggleSidebar}
+          categories={categories}
+          selectCategory={selectCategory}
+        />
         <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
         <div className="content">
           <Routes>
