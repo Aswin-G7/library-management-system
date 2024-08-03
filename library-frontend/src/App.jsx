@@ -1,22 +1,34 @@
-// src/App.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import axios from 'axios';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import BookList from './BookList';
 import BookDetails from './BookDetails';
 import SearchBar from './SearchBar';
-import AdminPage from './AdminPage'; // Import AdminPage
-import { books as booksData } from './booksData'; // Importing books data
+import AdminPage from './AdminPage';
 import './App.css';
 
-// Sample data for categories
 const categories = ['Spiritual', 'Self-Help'];
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/books');
+        setBooks(response.data);
+      } catch (error) {
+        console.error('Error fetching books:', error);
+      }
+    };
+
+    fetchBooks();
+  }, []);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -28,10 +40,10 @@ const App = () => {
 
   const selectCategory = (category) => {
     setSelectedCategory(category);
-    setIsSidebarOpen(false); // Close sidebar after selecting category
+    setIsSidebarOpen(false);
   };
 
-  const filteredBooks = booksData.filter(book => {
+  const filteredBooks = books.filter(book => {
     return (
       book.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
       (selectedCategory ? book.genre === selectedCategory : true)
@@ -52,8 +64,8 @@ const App = () => {
         <div className="content">
           <Routes>
             <Route path="/" element={<BookList books={filteredBooks} />} />
-            <Route path="/book/:id" element={<BookDetails books={booksData} />} />
-            <Route path="/admin" element={<AdminPage />} /> {/* Add AdminPage route */}
+            <Route path="/book/:id" element={<BookDetails books={books} />} />
+            <Route path="/admin" element={<AdminPage />} />
           </Routes>
         </div>
       </div>

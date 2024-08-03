@@ -1,10 +1,24 @@
-// src/BookDetails.jsx
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 import './BookDetails.css';
 
-const BookDetails = ({ books }) => {
+const BookDetails = () => {
   const { id } = useParams();
-  const book = books.find(b => b._id === parseInt(id));
+  const [book, setBook] = useState(null);
+
+  useEffect(() => {
+    const fetchBook = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5000/api/books/${id}`);
+        setBook(response.data);
+      } catch (error) {
+        console.error('Error fetching book:', error);
+      }
+    };
+
+    fetchBook();
+  }, [id]);
 
   if (!book) {
     return <div>Book not found</div>;
@@ -12,17 +26,18 @@ const BookDetails = ({ books }) => {
 
   return (
     <div className="book-details">
-      <h2>{book.title}</h2>
+      <h1>{book.title}</h1>
+      <div className="underline"></div>
       <div className="book-info">
-        <img src={book.coverImage} alt={book.title} className="book-cover" />
-        <button className="borrow-button">Borrow</button>
+        <img src={`http://localhost:5000${book.coverImage}`} alt={book.title} />
+        <div className="book-meta">
+          <h2>Rating: {book.rating}</h2>
+          <div className="underline"></div>
+          <h3>Description</h3>
+          <p>{book.description}</p>
+        </div>
       </div>
-      <h3>Rating</h3>
-      <hr />
-      <p>{book.rating}</p>
-      <h3>Description</h3>
-      <hr />
-      <p>{book.description}</p>
+      <button className="borrow-button">Borrow</button>
     </div>
   );
 };
