@@ -6,6 +6,7 @@ import Sidebar from './Sidebar';
 import BookList from './BookList';
 import BookDetails from './BookDetails';
 import SearchBar from './SearchBar';
+import AdminPage from './AdminPage'; // Import AdminPage
 import { books as booksData } from './booksData'; // Importing books data
 import './App.css';
 
@@ -52,6 +53,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<BookList books={filteredBooks} />} />
             <Route path="/book/:id" element={<BookDetails books={booksData} />} />
+            <Route path="/admin" element={<AdminPage />} /> {/* Add AdminPage route */}
           </Routes>
         </div>
       </div>
