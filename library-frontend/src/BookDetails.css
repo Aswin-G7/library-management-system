@@ -1,38 +1,41 @@
 /* src/BookDetails.css */
 .book-details {
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-top: 20px;
-    background-color: #f9f9f9;
-  }
-  
-  .book-details img.book-image {
-    width: 150px; /* Adjust as needed */
-    height: auto;
-    display: block;
-    margin: 20px 0;
-  }
-  
-  .book-details h2 {
-    margin-bottom: 10px;
-  }
-  
-  .book-details .details-section {
-    margin-top: 20px;
-  }
-  
-  .book-details .details-section h3 {
-    margin-bottom: 5px;
-  }
-  
-  .book-details .details-section hr {
-    margin-bottom: 10px;
-    border: 0;
-    border-top: 1px solid #ddd;
-  }
-  
-  .book-details p {
-    margin: 5px 0;
-  }
-  
+  padding: 20px;
+}
+
+.book-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.book-cover {
+  width: 150px;
+  height: auto;
+  margin-right: 20px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.borrow-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.borrow-button:hover {
+  background-color: #0056b3;
+}
+
+h3 {
+  margin-top: 20px;
+}
+
+hr {
+  margin: 10px 0;
+}
