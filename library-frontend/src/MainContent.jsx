@@ -4,6 +4,7 @@ import BookList from './BookList';
 import BookDetails from './BookDetails';
 import SearchBar from './SearchBar';
 import AdminPage from './AdminPage';
+import AddBookPage from './AddBookPage';
 
 const MainContent = ({ books, searchTerm, handleSearch }) => {
   const location = useLocation();
@@ -17,6 +18,7 @@ const MainContent = ({ books, searchTerm, handleSearch }) => {
         <Route path="/" element={<BookList books={books} />} />
         <Route path="/book/:id" element={<BookDetails books={books} />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/admin/add-book" element={<AddBookPage />} />
       </Routes>
     </div>
   );

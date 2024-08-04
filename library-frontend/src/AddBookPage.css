@@ -1,0 +1,34 @@
+/* src/AddBookPage.css */
+.add-book-page {
+    padding: 20px;
+  }
+  
+  .admin-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .admin-form label {
+    margin-bottom: 10px;
+  }
+  
+  .admin-form input,
+  .admin-form textarea {
+    padding: 8px;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  
+  .admin-form button {
+    padding: 10px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .admin-form button:hover {
+    background-color: #0056b3;
+  }
+  
