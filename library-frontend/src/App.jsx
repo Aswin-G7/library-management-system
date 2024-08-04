@@ -5,8 +5,8 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import BookList from './BookList';
 import BookDetails from './BookDetails';
-import SearchBar from './SearchBar';
 import AdminPage from './AdminPage';
+import MainContent from './MainContent';
 import './App.css';
 
 const categories = ['Spiritual', 'Self-Help'];
@@ -60,14 +60,11 @@ const App = () => {
           categories={categories}
           selectCategory={selectCategory}
         />
-        <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
-        <div className="content">
-          <Routes>
-            <Route path="/" element={<BookList books={filteredBooks} />} />
-            <Route path="/book/:id" element={<BookDetails books={books} />} />
-            <Route path="/admin" element={<AdminPage />} />
-          </Routes>
-        </div>
+        <MainContent
+          books={filteredBooks}
+          searchTerm={searchTerm}
+          handleSearch={handleSearch}
+        />
       </div>
     </Router>
   );
