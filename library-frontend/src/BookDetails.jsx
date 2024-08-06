@@ -24,12 +24,14 @@ const BookDetails = () => {
     return <div>Book not found</div>;
   }
 
+  const coverImageUrl = book.coverImage.startsWith('http') ? book.coverImage : `http://localhost:5000${book.coverImage}`;
+
   return (
     <div className="book-details">
       <h1>{book.title}</h1>
       <div className="underline"></div>
       <div className="book-info">
-        <img src={`http://localhost:5000${book.coverImage}`} alt={book.title} />
+        <img src={coverImageUrl} alt={book.title} />
         <div className="book-meta">
           <h2>Rating: {book.rating}</h2>
           <div className="underline"></div>
