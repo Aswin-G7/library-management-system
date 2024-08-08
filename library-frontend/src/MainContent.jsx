@@ -5,6 +5,7 @@ import BookDetails from './BookDetails';
 import SearchBar from './SearchBar';
 import AdminPage from './AdminPage';
 import AddBookPage from './AddBookPage';
+import RemoveBookPage from './RemoveBookPage'; // Import the new component
 
 const MainContent = ({ books, searchTerm, handleSearch }) => {
   const location = useLocation();
@@ -19,6 +20,7 @@ const MainContent = ({ books, searchTerm, handleSearch }) => {
         <Route path="/book/:id" element={<BookDetails books={books} />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/admin/add-book" element={<AddBookPage />} />
+        <Route path="/admin/remove-book" element={<RemoveBookPage books={books} />} /> {/* New Route */}
       </Routes>
     </div>
   );

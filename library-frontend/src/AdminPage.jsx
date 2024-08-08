@@ -1,4 +1,3 @@
-// src/AdminPage.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AdminPage.css';
@@ -10,6 +9,10 @@ const AdminPage = () => {
     navigate('/admin/add-book');
   };
 
+  const goToRemoveBookPage = () => {
+    navigate('/admin/remove-book');
+  };
+
   return (
     <div className="admin-page">
       <h2>Admin Dashboard</h2>
@@ -17,7 +20,7 @@ const AdminPage = () => {
         <div className="admin-box add-book" onClick={goToAddBookPage}>
           <h3>Add a Book</h3>
         </div>
-        <div className="admin-box remove-book">
+        <div className="admin-box remove-book" onClick={goToRemoveBookPage}>
           <h3>Remove a Book</h3>
         </div>
         <div className="admin-box registered-users">

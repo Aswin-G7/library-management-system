@@ -53,5 +53,17 @@ app.post('/api/books', async (req, res) => {
   }
 });
 
+app.delete('/api/books/:id', async (req, res) => {
+  try {
+    const book = await Book.findByIdAndDelete(req.params.id);
+    if (!book) {
+      return res.status(404).json({ message: 'Book not found' });
+    }
+    res.json({ message: 'Book removed' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

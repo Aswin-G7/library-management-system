@@ -1,0 +1,29 @@
+/* src/RemoveBookPage.css */
+.remove-book-page {
+    padding: 20px;
+  }
+  
+  .book-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .book-item {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    position: relative;
+  }
+  
+  .trash-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: red;
+  }
+  
+  .book-details {
+    margin-left: 10px;
+  }
+  
