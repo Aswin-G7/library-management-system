@@ -14,6 +14,12 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
+// Import user routes
+const userRoutes = require('./routes/auth');
+
+// Use the user routes
+app.use('/api/users', userRoutes);
+
 const bookSchema = new mongoose.Schema({
   title: String,
   author: String,
