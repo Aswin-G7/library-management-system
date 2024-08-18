@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import BookList from './BookList';
-import BookDetails from './BookDetails';
-import AdminPage from './AdminPage';
 import MainContent from './MainContent';
+import SignupPage from './SignupPage';
+import LoginPage from './LoginPage';
 import './App.css';
 
 const categories = ['Spiritual', 'Self-Help'];
@@ -16,6 +16,14 @@ const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
   const [books, setBooks] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      setIsAuthenticated(true);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -43,6 +51,10 @@ const App = () => {
     setIsSidebarOpen(false);
   };
 
+  const handleLogin = () => {
+    setIsAuthenticated(true);
+  };
+
   const filteredBooks = books.filter(book => {
     return (
       book.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -60,11 +72,24 @@ const App = () => {
           categories={categories}
           selectCategory={selectCategory}
         />
-        <MainContent
-          books={filteredBooks}
-          searchTerm={searchTerm}
-          handleSearch={handleSearch}
-        />
+        <Routes>
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+          <Route
+            path="/*"
+            element={
+              isAuthenticated ? (
+                <MainContent
+                  books={filteredBooks}
+                  searchTerm={searchTerm}
+                  handleSearch={handleSearch}
+                />
+              ) : (
+                <Navigate to="/login" />
+              )
+            }
+          />
+        </Routes>
       </div>
     </Router>
   );
