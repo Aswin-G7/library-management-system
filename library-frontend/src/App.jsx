@@ -3,10 +3,12 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import axios from 'axios';
 import Header from './Header';
 import Sidebar from './Sidebar';
-import BookList from './BookList';
 import MainContent from './MainContent';
 import SignupPage from './SignupPage';
 import LoginPage from './LoginPage';
+import AdminPage from './AdminPage';
+import AddBookPage from './AddBookPage';
+import RemoveBookPage from './RemoveBookPage';
 import './App.css';
 
 const categories = ['Spiritual', 'Self-Help'];
@@ -17,11 +19,23 @@ const App = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [books, setBooks] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     if (token) {
-      setIsAuthenticated(true);
+      axios.post('http://localhost:5000/api/users/validateToken', { token })
+        .then(response => {
+          setIsAuthenticated(true);
+        })
+        .catch(() => {
+          localStorage.removeItem('authToken');
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } else {
+      setLoading(false);
     }
   }, []);
 
@@ -55,6 +69,11 @@ const App = () => {
     setIsAuthenticated(true);
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('authToken');
+    setIsAuthenticated(false);
+  };
+
   const filteredBooks = books.filter(book => {
     return (
       book.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -62,10 +81,14 @@ const App = () => {
     );
   });
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Router>
       <div className="App">
-        <Header toggleSidebar={toggleSidebar} />
+        <Header toggleSidebar={toggleSidebar} handleLogout={handleLogout} isAuthenticated={isAuthenticated}/>
         <Sidebar
           isOpen={isSidebarOpen}
           toggleSidebar={toggleSidebar}
@@ -75,6 +98,11 @@ const App = () => {
         <Routes>
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/add-book" element={<AddBookPage />} />
+          <Route path="/admin/remove-book" element={<RemoveBookPage books={books} />} />
+
           <Route
             path="/*"
             element={

@@ -17,3 +17,22 @@
   border: none;
   color: white;
 }
+
+.logout-btn {
+  background-color: red;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  border-radius: 5px;
+  top: 23px;
+  right: 20px;
+}
+
+.logout-btn:hover {
+  background-color: #e0434f;
+}
+
+
+
