@@ -51,6 +51,23 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// Validate token route
+router.post('/validateToken', (req, res) => {
+  const token = req.body.token;
+
+  if (!token) {
+    return res.status(400).json({ message: 'No token provided' });
+  }
+
+  try {
+    // Verify the token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    res.json({ valid: true });
+  } catch (error) {
+    res.status(401).json({ message: 'Invalid or expired token' });
+  }
+});
+
 // Generate JWT Token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
