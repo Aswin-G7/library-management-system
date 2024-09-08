@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import axios from 'axios';
+import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import axios from 'axios';  
 import Header from './Header';
 import Sidebar from './Sidebar';
 import MainContent from './MainContent';
@@ -19,7 +19,7 @@ const App = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [books, setBooks] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);  
 
   useEffect(() => {
     const token = localStorage.getItem('authToken');
@@ -70,8 +70,8 @@ const App = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('authToken');
-    setIsAuthenticated(false);
+    localStorage.removeItem('authToken'); 
+    setIsAuthenticated(false);  
   };
 
   const filteredBooks = books.filter(book => {
@@ -82,13 +82,14 @@ const App = () => {
   });
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Loading...</div>;  
   }
 
   return (
     <Router>
       <div className="App">
-        <Header toggleSidebar={toggleSidebar} handleLogout={handleLogout} isAuthenticated={isAuthenticated}/>
+        {/* Now Header is inside Router */}
+        <Header toggleSidebar={toggleSidebar} handleLogout={handleLogout} isAuthenticated={isAuthenticated} />
         <Sidebar
           isOpen={isSidebarOpen}
           toggleSidebar={toggleSidebar}
@@ -99,10 +100,12 @@ const App = () => {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
 
+          {/* Admin Routes */}
           <Route path="/admin" element={<AdminPage />} />
           <Route path="/admin/add-book" element={<AddBookPage />} />
           <Route path="/admin/remove-book" element={<RemoveBookPage books={books} />} />
 
+          {/* User Routes */}
           <Route
             path="/*"
             element={

@@ -1,13 +1,17 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './Header.css';
 
 const Header = ({ toggleSidebar, handleLogout, isAuthenticated }) => {
-  const navigate = useNavigate(); // Now this is inside a component wrapped by Router
+  const navigate = useNavigate();
+  const location = useLocation();  // This is safe to use here inside Router context
 
   const onLogout = () => {
-    handleLogout(); // Clear local storage and set authentication state
-    navigate('/login'); // Navigate to login page after logout
+    handleLogout();
+    navigate('/login');
   };
+
+  // Show the logout button only if authenticated and not on the login/signup/admin pages
+  const showLogout = isAuthenticated && !location.pathname.startsWith('/admin') && !['/login', '/signup'].includes(location.pathname);
 
   return (
     <header className="header">
@@ -15,9 +19,10 @@ const Header = ({ toggleSidebar, handleLogout, isAuthenticated }) => {
         &#9776;
       </button>
       <h1>Library Management System</h1>
-      {/* Conditionally render the logout button based on authentication */}
-      {isAuthenticated && (
-        <button className="logout-btn" onClick={onLogout}>Logout</button>
+      {showLogout && (
+        <button className="logout-btn" onClick={onLogout}>
+          Logout
+        </button>
       )}
     </header>
   );
