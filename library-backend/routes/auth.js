@@ -7,7 +7,7 @@ const router = express.Router();
 
 // Sign-up route
 router.post('/signup', async (req, res) => {
-  const { email, rollNumber, password } = req.body;
+  const { firstName, lastName, email, rollNumber, password } = req.body;  // Include firstName and lastName
 
   try {
     const userExists = await User.findOne({ email });
@@ -16,10 +16,19 @@ router.post('/signup', async (req, res) => {
       return res.status(400).json({ message: 'User already exists' });
     }
 
-    const user = await User.create({ email, rollNumber, password });
+    // Create user with firstName and lastName
+    const user = await User.create({
+      firstName,   // Save first name
+      lastName,    // Save last name
+      email,
+      rollNumber,
+      password,
+    });
 
     res.status(201).json({
       _id: user._id,
+      firstName: user.firstName,  // Return first name
+      lastName: user.lastName,    // Return last name
       email: user.email,
       rollNumber: user.rollNumber,
       token: generateToken(user._id),
@@ -39,6 +48,8 @@ router.post('/login', async (req, res) => {
     if (user && (await user.matchPassword(password))) {
       res.json({
         _id: user._id,
+        firstName: user.firstName,  // Return first name on login
+        lastName: user.lastName,    // Return last name on login
         email: user.email,
         rollNumber: user.rollNumber,
         token: generateToken(user._id),
