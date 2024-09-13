@@ -11,16 +11,22 @@ const LoginPage = ({ onLogin }) => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await axios.post('http://localhost:5000/api/users/login', {
         email,
         password,
       });
-
+  
       localStorage.setItem('authToken', response.data.token);
+      localStorage.setItem('user', JSON.stringify({
+        firstName: response.data.firstName,
+        lastName: response.data.lastName,
+        rollNumber: response.data.rollNumber,
+        email: response.data.email,
+      }));
       onLogin();
-      navigate('/'); // Navigate to the front page after successful login
+      navigate('/'); 
     } catch (error) {
       setError('Login failed. Please check your email and password.');
     }

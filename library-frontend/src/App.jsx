@@ -7,6 +7,7 @@ import MainContent from './MainContent';
 import SignupPage from './SignupPage';
 import LoginPage from './LoginPage';
 import AdminPage from './AdminPage';
+import BorrowedUsersPage from './BorrowedUsersPage';
 import AddBookPage from './AddBookPage';
 import RemoveBookPage from './RemoveBookPage';
 import './App.css';
@@ -102,6 +103,7 @@ const App = () => {
 
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/borrowed-users" element={<BorrowedUsersPage />} />
           <Route path="/admin/add-book" element={<AddBookPage />} />
           <Route path="/admin/remove-book" element={<RemoveBookPage books={books} />} />
 

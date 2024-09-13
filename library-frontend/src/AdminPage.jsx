@@ -13,6 +13,10 @@ const AdminPage = () => {
     navigate('/admin/remove-book');
   };
 
+  const goToBorrowedUsersPage = () => {
+    navigate('/admin/borrowed-users');
+  };
+
   return (
     <div className="admin-page">
       <h2>Admin Dashboard</h2>
@@ -26,7 +30,7 @@ const AdminPage = () => {
         <div className="admin-box registered-users">
           <h3>List of Registered Users</h3>
         </div>
-        <div className="admin-box borrowed-users">
+        <div className="admin-box borrowed-users" onClick={goToBorrowedUsersPage}>
           <h3>Borrowed Users</h3>
         </div>
       </div>
