@@ -79,6 +79,33 @@ router.post('/validateToken', (req, res) => {
   }
 });
 
+// Middleware to protect routes
+const protect = async (req, res, next) => {
+  let token;
+
+  if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+    try {
+      // Extract the token from the header
+      token = req.headers.authorization.split(' ')[1];
+
+      // Verify the token
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+      // Attach user information to request object
+      req.user = await User.findById(decoded.id).select('-password'); // Exclude password
+
+      next(); // Continue to the next middleware or route
+    } catch (error) {
+      console.error('Token validation error:', error);
+      res.status(401).json({ message: 'Not authorized, token failed' });
+    }
+  }
+
+  if (!token) {
+    res.status(401).json({ message: 'Not authorized, no token' });
+  }
+};
+
 // Generate JWT Token
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -86,4 +113,10 @@ const generateToken = (id) => {
   });
 };
 
-module.exports = router;
+// Export the middleware and router separately
+module.exports = {
+  protect,          // Export protect middleware
+  generateToken,    // Export generateToken function
+};
+
+module.exports.router = router;  // Export router separately
