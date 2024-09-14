@@ -1,5 +1,5 @@
 // src/Sidebar.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './Sidebar.css';
 
 const Sidebar = ({ isOpen, toggleSidebar, categories, selectCategory }) => {

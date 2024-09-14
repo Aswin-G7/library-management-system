@@ -23,14 +23,14 @@ const App = () => {
   const [loading, setLoading] = useState(true);  
 
   useEffect(() => {
-    const token = localStorage.getItem('authToken');
+    const token = sessionStorage.getItem('authToken');
     if (token) {
       axios.post('http://localhost:5000/api/users/validateToken', { token })
         .then(response => {
           setIsAuthenticated(true);
         })
         .catch(() => {
-          localStorage.removeItem('authToken');
+          sessionStorage.removeItem('authToken');
         })
         .finally(() => {
           setLoading(false);
@@ -71,7 +71,7 @@ const App = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('authToken'); 
+    sessionStorage.removeItem('authToken'); 
     setIsAuthenticated(false);  
   };
 

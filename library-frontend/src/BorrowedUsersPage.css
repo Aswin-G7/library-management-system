@@ -1,12 +1,33 @@
 .borrowed-users-page {
-    padding: 20px;
-  }
-  
-  .borrowed-users-list ul {
-    list-style-type: none;
-  }
-  
-  .borrowed-users-list li {
-    margin: 10px 0;
-  }
-  
+  padding: 20px;
+}
+
+.borrowed-users-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.user-box {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-box p {
+  margin: 10px 0;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.user-name {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.book-title {
+  color: #007bff;
+}

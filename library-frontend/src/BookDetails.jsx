@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './BookDetails.css';
@@ -9,8 +9,8 @@ const BookDetails = () => {
   const [message, setMessage] = useState('');
   const [isBorrowed, setIsBorrowed] = useState(false); // State to track if user has already borrowed
 
-  // Fetch current user from localStorage
-  const user = JSON.parse(localStorage.getItem('user')); // { firstName, lastName, rollNumber }
+  // Fetch current user from sessionStorage
+  const user = JSON.parse(sessionStorage.getItem('user')); // { firstName, lastName, rollNumber }
 
   useEffect(() => {
     const fetchBook = async () => {
@@ -33,7 +33,7 @@ const BookDetails = () => {
 
   const handleBorrow = async () => {
     try {
-      const token = localStorage.getItem('authToken'); // Get the token from localStorage
+      const token = sessionStorage.getItem('authToken'); // Get the token from sessionStorage
   
       const response = await axios.post(
         `http://localhost:5000/api/books/${id}/borrow`,

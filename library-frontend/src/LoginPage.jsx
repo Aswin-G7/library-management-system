@@ -18,8 +18,8 @@ const LoginPage = ({ onLogin }) => {
         password,
       });
   
-      localStorage.setItem('authToken', response.data.token);
-      localStorage.setItem('user', JSON.stringify({
+      sessionStorage.setItem('authToken', response.data.token);
+      sessionStorage.setItem('user', JSON.stringify({
         firstName: response.data.firstName,
         lastName: response.data.lastName,
         rollNumber: response.data.rollNumber,
