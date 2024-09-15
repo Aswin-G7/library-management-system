@@ -31,3 +31,21 @@
 .book-title {
   color: #007bff;
 }
+
+.borrowed-date {
+  color: #555;
+  font-style: italic;
+}
+
+.return-button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.return-button:hover {
+  background-color: #218838;
+}
