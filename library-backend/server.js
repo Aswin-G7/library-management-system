@@ -16,10 +16,12 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
 
 // Import user routes
 const { router: userRoutes } = require('./routes/auth');
+const bookRoutes = require('./routes/book'); // Book routes
 const Book = require('./models/Book'); // Import the Book model
 
 // Use the user routes
-app.use('/api/users', userRoutes);
+app.use('/api/users', userRoutes);   // User routes
+app.use('/api/books', bookRoutes);   // Book routes
 
 // const bookSchema = new mongoose.Schema({
 //   title: String,
@@ -33,8 +35,12 @@ app.use('/api/users', userRoutes);
 // const Book = mongoose.model('Book', bookSchema);
 
 app.get('/api/books', async (req, res) => {
-  const books = await Book.find();
-  res.json(books);
+  try {
+    const books = await Book.find();
+    res.json(books);
+  } catch (error) {
+    res.status(500).json({ message: 'Server error' });
+  }
 });
 
 app.get('/api/books/:id', async (req, res) => {
@@ -73,36 +79,36 @@ app.delete('/api/books/:id', async (req, res) => {
 });
 
 // Route for borrowing a book
-app.post('/api/books/:id/borrow', async (req, res) => {
-  try {
-    const book = await Book.findById(req.params.id);
-    if (!book) {
-      return res.status(404).json({ message: 'Book not found' });
-    }
+// app.post('/api/books/:id/borrow', async (req, res) => {
+//   try {
+//     const book = await Book.findById(req.params.id);
+//     if (!book) {
+//       return res.status(404).json({ message: 'Book not found' });
+//     }
 
-    // Logic to update the borrowed information
-    const { firstName, lastName, rollNumber } = req.body; // Assuming user info is in req.body
+//     // Logic to update the borrowed information
+//     const { firstName, lastName, rollNumber } = req.body; // Assuming user info is in req.body
 
-    // Check if the user has already borrowed the book
-    const alreadyBorrowed = book.borrowedUsers.some(
-      (user) => user.rollNumber === rollNumber
-    );
+//     // Check if the user has already borrowed the book
+//     const alreadyBorrowed = book.borrowedUsers.some(
+//       (user) => user.rollNumber === rollNumber
+//     );
 
-    if (alreadyBorrowed) {
-      return res.status(400).json({ message: 'User has already borrowed this book' });
-    }
+//     if (alreadyBorrowed) {
+//       return res.status(400).json({ message: 'User has already borrowed this book' });
+//     }
 
-    // Add the user to the "borrowedUsers" array in the book document
-    book.borrowedUsers = book.borrowedUsers || [];
-    book.borrowedUsers.push({ firstName, lastName, rollNumber });
+//     // Add the user to the "borrowedUsers" array in the book document
+//     book.borrowedUsers = book.borrowedUsers || [];
+//     book.borrowedUsers.push({ firstName, lastName, rollNumber });
 
-    await book.save(); // Save the updated book
+//     await book.save(); // Save the updated book
 
-    res.status(200).json({ message: `Book borrowed successfully by ${firstName} ${lastName}` });
-  } catch (error) {
-    res.status(500).json({ message: 'Failed to borrow book', error });
-  }
-});
+//     res.status(200).json({ message: `Book borrowed successfully by ${firstName} ${lastName}` });
+//   } catch (error) {
+//     res.status(500).json({ message: 'Failed to borrow book', error });
+//   }
+// });
 
 
 const PORT = process.env.PORT || 5000;

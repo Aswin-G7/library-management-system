@@ -41,6 +41,7 @@ router.post('/:id/borrow', protect, async (req, res) => {
       firstName: user.firstName,
       lastName: user.lastName,
       rollNumber: user.rollNumber,
+      borrowedDate: new Date(),  // Add current date and time
     });
     await book.save();
 
@@ -60,6 +61,33 @@ router.get('/:id/borrowed-users', async (req, res) => {
       return res.status(404).json({ message: 'Book not found' });
     }
     res.json(book.borrowedUsers);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Return a book (Simplified to directly remove the user)
+router.delete('/:id/return', async (req, res) => {
+  try {
+    const { rollNumber } = req.body;
+    const book = await Book.findById(req.params.id);
+
+    if (!book) {
+      return res.status(404).json({ message: 'Book not found' });
+    }
+
+    // Find the index of the user in the borrowedUsers array
+    const userIndex = book.borrowedUsers.findIndex(user => user.rollNumber === rollNumber);
+
+    if (userIndex === -1) {
+      return res.status(400).json({ message: 'User not found in the borrowed users list' });
+    }
+
+    // Remove the user from the borrowedUsers array
+    book.borrowedUsers.splice(userIndex, 1);
+    await book.save();
+
+    res.json({ message: 'Book returned successfully' });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
