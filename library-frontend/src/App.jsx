@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import axios from 'axios';  
 import Header from './Header';
 import Sidebar from './Sidebar';
+import BorrowedBooksPage from './BorrowedBooksPage'; // Import the new BorrowedBooksPage component
 import MainContent from './MainContent';
 import SignupPage from './SignupPage';
 import LoginPage from './LoginPage';
@@ -10,6 +11,7 @@ import AdminPage from './AdminPage';
 import BorrowedUsersPage from './BorrowedUsersPage';
 import AddBookPage from './AddBookPage';
 import RemoveBookPage from './RemoveBookPage';
+
 import './App.css';
 
 const categories = ['Spiritual', 'Self-Help'];
@@ -88,8 +90,7 @@ const App = () => {
 
   return (
     <Router>
-      <div className="App">
-        {/* Now Header is inside Router */}
+      <div className={`App ${isSidebarOpen ? 'content-shifted' : ''}`}>
         <Header toggleSidebar={toggleSidebar} handleLogout={handleLogout} isAuthenticated={isAuthenticated} />
         <Sidebar
           isOpen={isSidebarOpen}
@@ -108,6 +109,8 @@ const App = () => {
           <Route path="/admin/remove-book" element={<RemoveBookPage books={books} />} />
 
           {/* User Routes */}
+          <Route path="/borrowed-books" element={isAuthenticated ? <BorrowedBooksPage /> : <Navigate to="/login" />} />
+
           <Route
             path="/*"
             element={

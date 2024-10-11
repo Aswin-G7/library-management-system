@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import BookList from './BookList';
 import BookDetails from './BookDetails';
 import SearchBar from './SearchBar';
+import BorrowedBooksPage from './BorrowedBooksPage'; // Import the new BorrowedBooksPage component
 import AdminPage from './AdminPage';
 import AddBookPage from './AddBookPage';
 import RemoveBookPage from './RemoveBookPage'; // Import the new component

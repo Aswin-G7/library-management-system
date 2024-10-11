@@ -12,7 +12,7 @@
 }
 
 .sidebar.open {
-  width: 250px;
+  width: 250px; /* Width of the sidebar when opened */
 }
 
 .sidebar .close-btn {
@@ -33,16 +33,29 @@
 
 .sidebar ul li {
   padding: 8px 8px 8px 32px;
-  text-decoration: none;
   font-size: 25px;
   color: #818181;
   display: block;
   transition: 0.3s;
   cursor: pointer;
+  text-decoration: none; /* Ensure no underline */
 }
 
 .sidebar ul li:hover {
-  color: #f1f1f1;
+  color: #f1f1f1; /* Change color on hover */
+}
+
+/* Updated styles for links in the sidebar */
+.sidebar ul li a {
+  text-decoration: none; /* Remove underline from links */
+  color: inherit; /* Inherit the color from the li parent */
+  display: block; /* Ensure the link occupies the full li space */
+  height: 100%; /* Fill the li height */
+}
+
+/* New rule to specifically target the 'Borrowed Books' link if it needs to be styled differently */
+.sidebar ul li a:hover {
+  color: #f1f1f1; /* Change color on hover for links */
 }
 
 .dropdown {
@@ -52,7 +65,6 @@
 
 .dropdown li {
   padding: 8px 8px 8px 32px;
-  text-decoration: none;
   font-size: 20px;
   color: #818181;
   display: block;
@@ -61,7 +73,7 @@
 }
 
 .dropdown li:hover {
-  color: #f1f1f1;
+  color: #f1f1f1; /* Change color on hover for dropdown items */
 }
 
 .categories-list {
@@ -71,7 +83,6 @@
 
 .categories-list li {
   padding: 8px 8px 8px 32px;
-  text-decoration: none;
   font-size: 20px;
   color: #818181;
   display: block;
@@ -80,5 +91,5 @@
 }
 
 .categories-list li:hover {
-  color: #f1f1f1;
+  color: #f1f1f1; /* Change color on hover for category items */
 }
