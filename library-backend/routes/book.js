@@ -1,8 +1,29 @@
 const express = require('express');
 const Book = require('../models/Book');
-const User = require('../models/User');
 const router = express.Router();
 const { protect } = require('../routes/auth'); // Import protect middleware
+
+// Get borrowed books for the logged-in user
+router.get('/borrowed-books', protect, async (req, res) => {
+  try {
+    const user = req.user; // Get the logged-in user info from the protect middleware
+    console.log('Fetching borrowed books for:', user); // Log user info
+    
+    const borrowedBooks = await Book.find({ 'borrowedUsers.rollNumber': user.rollNumber });
+    console.log('User rollNumber:', user.rollNumber);
+
+    console.log('Borrowed books:', borrowedBooks); // See if the query returns any data
+
+    if (!borrowedBooks || borrowedBooks.length === 0) {
+      return res.status(404).json({ message: 'No borrowed books found' });
+    }
+
+    res.json(borrowedBooks);
+  } catch (error) {
+    console.error('Error in borrowed books route:', error);
+    res.status(500).json({ message: error.message });
+  }
+});
 
 // Get a book by ID
 router.get('/:id', async (req, res) => {
@@ -47,7 +68,7 @@ router.post('/:id/borrow', protect, async (req, res) => {
 
     res.json({ 
       message: 'Book borrowed successfully',  
-     });
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

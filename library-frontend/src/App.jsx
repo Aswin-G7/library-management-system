@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate } from 'react-router-dom';
 import axios from 'axios';  
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -90,7 +90,8 @@ const App = () => {
 
   return (
     <Router>
-      <div className={`App ${isSidebarOpen ? 'content-shifted' : ''}`}>
+      <div className="App">
+        {/* Now Header is inside Router */}
         <Header toggleSidebar={toggleSidebar} handleLogout={handleLogout} isAuthenticated={isAuthenticated} />
         <Sidebar
           isOpen={isSidebarOpen}

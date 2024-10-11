@@ -83,26 +83,30 @@ router.post('/validateToken', (req, res) => {
 const protect = async (req, res, next) => {
   let token;
 
+  //console.log('Authorization header:', req.headers.authorization);
+
   if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
     try {
       // Extract the token from the header
       token = req.headers.authorization.split(' ')[1];
+      //console.log('Token received:', token); // Log the extracted token
 
       // Verify the token
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      //console.log('Decoded token:', decoded); // Log the decoded token
 
       // Attach user information to request object
       req.user = await User.findById(decoded.id).select('-password'); // Exclude password
 
-      next(); // Continue to the next middleware or route
+      return next(); // Continue to the next middleware or route
     } catch (error) {
       console.error('Token validation error:', error);
-      res.status(401).json({ message: 'Not authorized, token failed' });
+      return res.status(401).json({ message: 'Not authorized, token failed' });
     }
   }
 
   if (!token) {
-    res.status(401).json({ message: 'Not authorized, no token' });
+    return res.status(401).json({ message: 'Not authorized, no token' });
   }
 };
 
