@@ -28,6 +28,7 @@ const bookSchema = new mongoose.Schema({
       lastName: String,
       rollNumber: String,
       borrowedDate: { type: Date, default: Date.now },  // Track the date of borrowing
+      dueDate: { type: Date },  // Due date for returning the book
     }
   ],
 });
