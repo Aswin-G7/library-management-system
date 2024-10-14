@@ -11,6 +11,7 @@ import AdminPage from './AdminPage';
 import BorrowedUsersPage from './BorrowedUsersPage';
 import AddBookPage from './AddBookPage';
 import RemoveBookPage from './RemoveBookPage';
+import FinesPage from './FinesPage';
 
 import './App.css';
 
@@ -110,7 +111,10 @@ const App = () => {
           <Route path="/admin/remove-book" element={<RemoveBookPage books={books} />} />
 
           {/* User Routes */}
-          <Route path="/borrowed-books" element={isAuthenticated ? <BorrowedBooksPage /> : <Navigate to="/login" />} />
+          <Route path="/borrowed-books" element={isAuthenticated ? <BorrowedBooksPage isSidebarOpen={isSidebarOpen} /> : <Navigate to="/login" />} />
+
+          {/* Fines route */}
+          <Route path="/fines" element={isAuthenticated ? <FinesPage /> : <Navigate to="/login" />} />
 
           <Route
             path="/*"

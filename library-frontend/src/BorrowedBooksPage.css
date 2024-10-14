@@ -1,0 +1,10 @@
+.borrowed-books-container {
+    margin-left: 0;
+    padding: 16px;
+    transition: margin-left 0.5s ease;
+  }
+  
+  .borrowed-books-container.open {
+    margin-left: 260px; /* Match sidebar width */
+  }
+  
