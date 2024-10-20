@@ -50,7 +50,7 @@ const FinesPage = () => {
                 <td>{fine.bookTitle}</td>
                 <td>{new Date(fine.dueDate).toLocaleDateString()}</td>
                 <td>{fine.daysOverdue}</td>
-                <td>${fine.fineAmount}</td>
+                <td>₹{fine.fineAmount}</td>
               </tr>
             ))}
           </tbody>
