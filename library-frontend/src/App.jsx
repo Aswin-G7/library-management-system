@@ -15,6 +15,7 @@ import FinesPage from './FinesPage';
 
 import './App.css';
 
+
 const categories = ['Spiritual', 'Self-Help'];
 
 const App = () => {

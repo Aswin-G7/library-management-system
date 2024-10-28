@@ -89,7 +89,7 @@ const BookDetails = () => {
           <h3>About the Author</h3>
           <p>{book.author}</p>
           <h3>Location in Library</h3>
-          <p>Shelf: B-23, Section: Fiction</p>
+          <p>{book.location}</p>
         </div>
       </div>
       
