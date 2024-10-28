@@ -22,6 +22,12 @@ const bookSchema = new mongoose.Schema({
   description: {
     type: String,
   },
+  authorBio: { 
+    type: String 
+  },  // New field for author's bio
+  location: { 
+    type: String 
+  },  // New field for library location
   borrowedUsers: [
     {
       firstName: String,
@@ -31,6 +37,10 @@ const bookSchema = new mongoose.Schema({
       dueDate: { type: Date },  // Due date for returning the book
     }
   ],
+  borrowedCount: {
+    type: Number,
+    default: 0, // Initializes the borrow count to zero
+  },
 });
 
 const Book = mongoose.model('Book', bookSchema);

@@ -11,7 +11,7 @@ router.get('/borrowed-books', protect, async (req, res) => {
     //console.log('Fetching borrowed books for:', user); // Log user info
     
     const borrowedBooks = await Book.find({ 'borrowedUsers.rollNumber': user.rollNumber });
-    console.log('User rollNumber:', user.rollNumber);
+    //console.log('User rollNumber:', user.rollNumber);
 
     //console.log('Borrowed books:', borrowedBooks); // See if the query returns any data
 
@@ -58,6 +58,8 @@ router.post('/:id/borrow', protect, async (req, res) => {
       return res.status(400).json({ message: 'User has already borrowed this book' });
     }
 
+    // Increment borrowedCount for a unique user
+    book.borrowedCount = (book.borrowedCount || 0) + 1;
 
     // Calculate the due date as 7 days from the current date
     const borrowedDate = new Date();
