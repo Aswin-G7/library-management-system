@@ -1,5 +1,5 @@
 .book-details {
-  max-width: 800px;
+  max-width: 1300px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -17,17 +17,39 @@
 
 .book-info {
   display: flex;
-  align-items: flex-start;
+  justify-content: space-between;
 }
 
-.book-info img {
-  max-width: 300px;
+/* Adjusted Left Section */
+.book-meta-left {
+  display: flex;  /* Display the cover image and description side by side */
+  flex: 1;
+  margin-right: 40px;
+}
+
+.book-meta-left img {
+  max-width: 250px;
   height: auto;
   margin-right: 20px;
 }
 
-.book-meta {
-  flex-grow: 1;
+.book-description {
+  max-width: 500px;
+}
+
+.book-description h3 {
+  margin-bottom: 10px;
+}
+
+/* Right Section */
+.book-meta-right {
+  flex: 0.5;
+  border-left: 1px solid #ddd;
+  padding-left: 20px;
+}
+
+.book-meta-right h3 {
+  margin-top: 0;
 }
 
 .borrow-button {

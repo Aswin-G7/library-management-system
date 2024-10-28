@@ -7,10 +7,9 @@ const BookDetails = () => {
   const { id } = useParams();
   const [book, setBook] = useState(null);
   const [message, setMessage] = useState('');
-  const [isBorrowed, setIsBorrowed] = useState(false); // State to track if user has already borrowed
+  const [isBorrowed, setIsBorrowed] = useState(false);
 
-  // Fetch current user from sessionStorage
-  const user = JSON.parse(sessionStorage.getItem('user')); // { firstName, lastName, rollNumber }
+  const user = JSON.parse(sessionStorage.getItem('user')); 
 
   useEffect(() => {
     const fetchBook = async () => {
@@ -18,7 +17,6 @@ const BookDetails = () => {
         const response = await axios.get(`http://localhost:5000/api/books/${id}`);
         setBook(response.data);
 
-        // Check if the current user has already borrowed the book
         const userHasBorrowed = response.data.borrowedUsers?.some(
           (borrowedUser) => borrowedUser.rollNumber === user.rollNumber
         );
@@ -33,8 +31,8 @@ const BookDetails = () => {
 
   const handleBorrow = async () => {
     try {
-      const token = sessionStorage.getItem('authToken'); // Get the token from sessionStorage
-  
+      const token = sessionStorage.getItem('authToken'); 
+
       const response = await axios.post(
         `http://localhost:5000/api/books/${id}/borrow`,
         {
@@ -44,13 +42,18 @@ const BookDetails = () => {
         },
         {
           headers: {
-            Authorization: `Bearer ${token}`,  // Send the token in the request headers
+            Authorization: `Bearer ${token}`,
           },
         }
       );
-  
+
       setMessage(response.data.message);
-      setIsBorrowed(true); // After borrowing, set the user as having borrowed the book
+      setIsBorrowed(true);
+
+    // Re-fetch book data to update the borrowed count
+    const updatedBookResponse = await axios.get(`http://localhost:5000/api/books/${id}`);
+    setBook(updatedBookResponse.data);
+
     } catch (error) {
       if (error.response) {
         setMessage('Error borrowing the book: ' + error.response.data.message);
@@ -69,20 +72,34 @@ const BookDetails = () => {
   return (
     <div className="book-details">
       <h1>{book.title}</h1>
+      {book.rating && <h2>Rating: {book.rating} / 5</h2>} {/* Display the rating if available */}
       <div className="underline"></div>
       <div className="book-info">
-        <img src={coverImageUrl} alt={book.title} />
-        <div className="book-meta">
-          <h2>Rating: {book.rating}</h2>
-          <div className="underline"></div>
-          <h3>Description</h3>
-          <p>{book.description}</p>
+        {/* Left Section: Book image and description side by side */}
+        <div className="book-meta-left">
+          <img src={coverImageUrl} alt={book.title} />
+          <div className="book-description">
+            <h3>Description</h3>
+            <p>{book.description}</p>
+          </div>
+        </div>
+
+        {/* Right Section: About the Author and Library Location */}
+        <div className="book-meta-right">
+          <h3>About the Author</h3>
+          <p>{book.author}</p>
+          <h3>Location in Library</h3>
+          <p>Shelf: B-23, Section: Fiction</p>
         </div>
       </div>
+      
+      {/* Display the borrowed user count */}
+      <h3>Number of Borrows: {book.borrowedCount}</h3>
+
       <button 
         className="borrow-button" 
         onClick={handleBorrow} 
-        disabled={isBorrowed} // Disable button if the user has already borrowed
+        disabled={isBorrowed}
       >
         {isBorrowed ? 'Already Borrowed' : 'Borrow'}
       </button>
