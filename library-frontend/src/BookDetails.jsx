@@ -72,28 +72,27 @@ const BookDetails = () => {
   return (
     <div className="book-details">
       <h1>{book.title}</h1>
-      {book.rating && <h2>Rating: {book.rating} / 5</h2>} {/* Display the rating if available */}
+      {book.rating && <h2>Rating: {book.rating} / 5</h2>}
       <div className="underline"></div>
       <div className="book-info">
-        {/* Left Section: Book image and description side by side */}
         <div className="book-meta-left">
-          <img src={coverImageUrl} alt={book.title} />
+          <div className="book-image">
+            <img src={coverImageUrl} alt={book.title} />
+          </div>
           <div className="book-description">
-            <h3>Description</h3>
+            <h2>Description</h2>
             <p>{book.description}</p>
           </div>
         </div>
 
-        {/* Right Section: About the Author and Library Location */}
         <div className="book-meta-right">
-          <h3>About the Author</h3>
-          <p>{book.author}</p>
-          <h3>Location in Library</h3>
+          <h2>About the Author</h2>
+          <p>{book.authorBio}</p>
+          <h2>Location in Library</h2>
           <p>{book.location}</p>
         </div>
       </div>
-      
-      {/* Display the borrowed user count */}
+
       <h3>Number of Borrows: {book.borrowedCount}</h3>
 
       <button 

@@ -1,4 +1,3 @@
-// src/AddBookPage.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import './AddBookPage.css';
@@ -11,9 +10,14 @@ const AddBookPage = () => {
     genre: '',
     rating: '',
     description: '',
-    authorBio: '', // New field for author's bio
-    location: '',  // New field for library location
+    authorBio: '',
+    location: '',
   });
+
+  const genres = [
+    'Art', 'Biography', 'Business', "Children's", 'Christian', 'Classics',
+    'Comics', 'Cookbooks', 'Fantasy', 'Fiction', 'Spiritual', 'Self-Help'
+  ];
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -36,8 +40,8 @@ const AddBookPage = () => {
         genre: '',
         rating: '',
         description: '',
-        authorBio: '', // Reset field
-        location: '',  // Reset field
+        authorBio: '',
+        location: '',
       });
     } catch (error) {
       console.error('Error adding book:', error);
@@ -66,7 +70,12 @@ const AddBookPage = () => {
         <label>
           Genre:
           <br />
-          <input type="text" name="genre" value={book.genre} onChange={handleChange} required />
+          <select name="genre" value={book.genre} onChange={handleChange} required>
+            <option value="" disabled>Select a genre</option>
+            {genres.map((genre) => (
+              <option key={genre} value={genre}>{genre}</option>
+            ))}
+          </select>
         </label>
         <label>
           Rating:

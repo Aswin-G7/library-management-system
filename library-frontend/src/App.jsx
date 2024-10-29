@@ -16,7 +16,20 @@ import FinesPage from './FinesPage';
 import './App.css';
 
 
-const categories = ['Spiritual', 'Self-Help'];
+const categories = [
+  'Spiritual', 
+  'Self-Help',
+  'Art',
+  'Biography',
+  'Business',
+  "Children's",
+  'Christian',
+  'Classics',
+  'Comics',
+  'Cookbooks',
+  'Fantasy',
+  'Fiction'
+];
 
 const App = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
