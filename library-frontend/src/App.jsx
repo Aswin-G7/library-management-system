@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate, useNavigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import axios from 'axios';  
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -12,6 +12,7 @@ import BorrowedUsersPage from './BorrowedUsersPage';
 import AddBookPage from './AddBookPage';
 import RemoveBookPage from './RemoveBookPage';
 import FinesPage from './FinesPage';
+import BookDetailsHeader from './BookDetailsHeader';
 
 import './App.css';
 
@@ -37,7 +38,9 @@ const App = () => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [books, setBooks] = useState([]);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);  
+  const [loading, setLoading] = useState(true); 
+  
+  const location = useLocation(); // Get the current location
 
   useEffect(() => {
     const token = sessionStorage.getItem('authToken');
@@ -103,11 +106,15 @@ const App = () => {
     return <div>Loading...</div>;  
   }
 
+  // Determine which header to display based on the route
+  const showHeader = location.pathname.startsWith('/book/')
+  ? null
+  : <Header toggleSidebar={toggleSidebar} handleLogout={handleLogout} isAuthenticated={isAuthenticated} />;
+
   return (
-    <Router>
       <div className="App">
         {/* Now Header is inside Router */}
-        <Header toggleSidebar={toggleSidebar} handleLogout={handleLogout} isAuthenticated={isAuthenticated} />
+        {showHeader}
         <Sidebar
           isOpen={isSidebarOpen}
           toggleSidebar={toggleSidebar}
@@ -146,7 +153,7 @@ const App = () => {
           />
         </Routes>
       </div>
-    </Router>
+    
   );
 };
 

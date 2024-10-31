@@ -5,13 +5,14 @@
 }
 
 .book-details h1 {
+  font-family: Copernicus, "Libre Baskerville", Georgia, serif;
   text-align: center;
 }
 
 .underline {
   width: 100%;
   height: 2px;
-  background-color: #ddd;
+  background-color: #89b8bc;
   margin: 20px 0;
 }
 
@@ -42,6 +43,7 @@
 .book-description h2 {
   margin-top: 0px;
   margin-bottom: 0px;
+  font-family: Copernicus, "Libre Baskerville", Georgia, serif
 }
 
 .book-description p {
@@ -51,8 +53,9 @@
 /* Right Section */
 .book-meta-right {
   flex: 0.5;
-  border-left: 1px solid #ddd;
+  border-left: 2px solid #89b8bc;
   padding-left: 20px;
+  font-family: Copernicus, "Libre Baskerville", Georgia, serif
 }
 
 .book-meta-right h2 {

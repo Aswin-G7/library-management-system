@@ -18,7 +18,8 @@ const Header = ({ toggleSidebar, handleLogout, isAuthenticated }) => {
       <button className="hamburger-btn" onClick={toggleSidebar}>
         &#9776;
       </button>
-      <h1>Library Management System</h1>
+      <h1>“The only thing you absolutely have to know is the location of the library.”</h1>
+      <h1>– Albert Einstein</h1>
       {showLogout && (
         <button className="logout-btn" onClick={onLogout}>
           Logout

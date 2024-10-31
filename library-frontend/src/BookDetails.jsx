@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import BookDetailsHeader from './BookDetailsHeader';
 import './BookDetails.css';
 
 const BookDetails = () => {
@@ -71,7 +72,8 @@ const BookDetails = () => {
 
   return (
     <div className="book-details">
-      <h1>{book.title}</h1>
+    {/* Add the BookDetailsHeader here, passing the title */}
+      <BookDetailsHeader title={book.title} />
       {book.rating && <h2>Rating: {book.rating} / 5</h2>}
       <div className="underline"></div>
       <div className="book-info">

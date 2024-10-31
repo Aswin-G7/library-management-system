@@ -1,37 +1,59 @@
 /* src/Header.css */
 .header {
-  background-color: #4CAF50;
+  background-color: #512b10;
   color: white;
   padding: 10px;
   text-align: center;
   position: relative;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.header h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  padding: 10px 0;
+  font-style: italic;
+  font-weight: 400;
+  color: #ffffff;
 }
 
 .hamburger-btn {
-  font-size: 30px;
+  font-size: 26px;
   cursor: pointer;
   position: absolute;
   left: 20px;
-  top: 10px;
+  top: 50%;
+  transform: translateY(-50%);
   background: none;
   border: none;
-  color: white;
+  color: #ecf0f1;
+  transition: color 0.3s;
+}
+
+.hamburger-btn:hover {
+  color: #bdc3c7;
 }
 
 .logout-btn {
-  background-color: red;
-  color: white;
-  padding: 15px 20px;
+  background-color: #e74c3c;
+  color: #ecf0f1;
+  padding: 10px 16px;
   border: none;
   cursor: pointer;
   position: absolute;
-  border-radius: 5px;
-  top: 23px;
+  border-radius: 20px;
+  top: 50%;
   right: 20px;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .logout-btn:hover {
-  background-color: #e0434f;
+  background-color: #c0392b;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 

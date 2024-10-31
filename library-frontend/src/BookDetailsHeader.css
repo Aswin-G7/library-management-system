@@ -1,0 +1,21 @@
+/* In your CSS file (e.g., BookDetailsHeader.css) */
+.book-details-header {
+    background-color: #512b10; /* Light background for contrast */
+    color: #333; /* Dark text for readability */
+    /* padding: 1.5rem; Adds spacing around the content */
+    padding: 40px;
+    border-bottom: 2px solid #ddd; /* Subtle border to separate header from content */
+    text-align: center; /* Centers the header text */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+    border-radius: 20px;
+    width: 1510px;
+  }
+  
+  .book-details-header h1 {
+    font-size: 2rem; /* Large title font */
+    color: #ffffff;
+    font-weight: bold; /* Makes title stand out */
+    margin: 0; /* Removes default margin for a compact look */
+    letter-spacing: 1px; /* Subtle letter spacing for readability */
+  }
+  
