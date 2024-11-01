@@ -9,6 +9,7 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
     border-radius: 20px;
     width: 1510px;
+    padding-bottom: 1%;
   }
   
   .book-details-header h1 {
@@ -17,5 +18,11 @@
     font-weight: bold; /* Makes title stand out */
     margin: 0; /* Removes default margin for a compact look */
     letter-spacing: 1px; /* Subtle letter spacing for readability */
+  }
+
+  .book-details-header p {
+    font-size: 19px;
+    color: #f4f2f2; /* Light color for author name */
+    margin-top: 10px;
   }
   

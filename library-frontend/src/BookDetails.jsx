@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import BookDetailsHeader from './BookDetailsHeader';
+import StarRating from './StarRating';
 import './BookDetails.css';
 
 const BookDetails = () => {
@@ -9,6 +10,8 @@ const BookDetails = () => {
   const [book, setBook] = useState(null);
   const [message, setMessage] = useState('');
   const [isBorrowed, setIsBorrowed] = useState(false);
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState('');
 
   const user = JSON.parse(sessionStorage.getItem('user')); 
 
@@ -64,6 +67,13 @@ const BookDetails = () => {
     }
   };
 
+  const handleCommentSubmit = () => {
+    if (newComment.trim()) {
+      setComments([...comments, { user: user.firstName, text: newComment }]);
+      setNewComment('');
+    }
+  };
+
   if (!book) {
     return <div>Book not found</div>;
   }
@@ -73,8 +83,8 @@ const BookDetails = () => {
   return (
     <div className="book-details">
     {/* Add the BookDetailsHeader here, passing the title */}
-      <BookDetailsHeader title={book.title} />
-      {book.rating && <h2>Rating: {book.rating} / 5</h2>}
+      <BookDetailsHeader title={book.title} author={book.author} />
+      {book.rating && <StarRating rating={book.rating} />}
       <div className="underline"></div>
       <div className="book-info">
         <div className="book-meta-left">
@@ -105,6 +115,23 @@ const BookDetails = () => {
         {isBorrowed ? 'Already Borrowed' : 'Borrow'}
       </button>
       {message && <p>{message}</p>}
+
+
+      <div className="comment-section">
+        <h3>Comments</h3>
+        <div className="comments">
+          {comments.map((comment, index) => (
+            <p key={index}><strong>{comment.user}:</strong> {comment.text}</p>
+          ))}
+        </div>
+        <input
+          type="text"
+          placeholder="Add a comment"
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+        />
+        <button onClick={handleCommentSubmit}>Submit</button>
+      </div>
     </div>
   );
 };

@@ -83,3 +83,70 @@
 .borrow-button:hover {
   background-color: #0056b3;
 }
+
+/* star rating css */
+.star-rating {
+  display: flex;
+  justify-content: center; /* Center-align the stars */
+  font-size: 2rem; /* Increase the font size to make stars larger */
+  color: gold;
+  margin-top: 1em; /* Adds some space above the stars */
+}
+
+.star {
+  margin-right: 5px;
+}
+
+.star.half {
+  color: lightgray; /* Different color to indicate a half-star */
+}
+
+.star.empty {
+  color: lightgray; /* Gray color for empty stars */
+}
+
+.rating-text {
+  font-size: 1.0rem; /* Smaller font for text */
+  color: #666; /* Light gray color */
+  margin-left: 8px; /* Space between stars and rating text */
+  margin-top: 15px;
+}
+
+
+.comment-section {
+  margin-top: 20px;
+}
+
+.comment-section h3 {
+  font-family: Copernicus, "Libre Baskerville", Georgia, serif;
+  margin-bottom: 10px;
+}
+
+.comments {
+  max-height: 150px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.comment-section input[type="text"] {
+  width: 80%;
+  padding: 8px;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.comment-section button {
+  padding: 8px 12px;
+  font-size: 14px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.comment-section button:hover {
+  background-color: #0056b3;
+}
