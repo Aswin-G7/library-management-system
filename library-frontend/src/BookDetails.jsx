@@ -12,31 +12,35 @@ const BookDetails = () => {
   const [isBorrowed, setIsBorrowed] = useState(false);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
-
-  const user = JSON.parse(sessionStorage.getItem('user')); 
+  const user = JSON.parse(sessionStorage.getItem('user'));
 
   useEffect(() => {
-    const fetchBook = async () => {
+    // Fetch book details and comments on component mount
+    const fetchBookAndComments = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/books/${id}`);
-        setBook(response.data);
+        const bookResponse = await axios.get(`http://localhost:5000/api/books/${id}`);
+        setBook(bookResponse.data);
 
-        const userHasBorrowed = response.data.borrowedUsers?.some(
+        // Check if the user has borrowed this book
+        const userHasBorrowed = bookResponse.data.borrowedUsers?.some(
           (borrowedUser) => borrowedUser.rollNumber === user.rollNumber
         );
         setIsBorrowed(userHasBorrowed);
+
+        // Fetch comments for this book
+        const commentsResponse = await axios.get(`http://localhost:5000/api/comments/${id}`);
+        setComments(commentsResponse.data);
       } catch (error) {
-        console.error('Error fetching book:', error);
+        console.error('Error fetching book or comments:', error);
       }
     };
 
-    fetchBook();
+    fetchBookAndComments();
   }, [id, user.rollNumber]);
 
   const handleBorrow = async () => {
     try {
-      const token = sessionStorage.getItem('authToken'); 
-
+      const token = sessionStorage.getItem('authToken');
       const response = await axios.post(
         `http://localhost:5000/api/books/${id}/borrow`,
         {
@@ -54,23 +58,27 @@ const BookDetails = () => {
       setMessage(response.data.message);
       setIsBorrowed(true);
 
-    // Re-fetch book data to update the borrowed count
-    const updatedBookResponse = await axios.get(`http://localhost:5000/api/books/${id}`);
-    setBook(updatedBookResponse.data);
-
+      // Re-fetch book data to update the borrowed count
+      const updatedBookResponse = await axios.get(`http://localhost:5000/api/books/${id}`);
+      setBook(updatedBookResponse.data);
     } catch (error) {
-      if (error.response) {
-        setMessage('Error borrowing the book: ' + error.response.data.message);
-      } else {
-        setMessage('Error borrowing the book.');
-      }
+      setMessage('Error borrowing the book.');
     }
   };
 
-  const handleCommentSubmit = () => {
+  const handleCommentSubmit = async () => {
     if (newComment.trim()) {
-      setComments([...comments, { user: user.firstName, text: newComment }]);
-      setNewComment('');
+      try {
+        await axios.post(`http://localhost:5000/api/comments/${id}`, {
+          user: user.firstName,
+          text: newComment,
+        });
+
+        setComments([...comments, { user: user.firstName, text: newComment }]);
+        setNewComment('');
+      } catch (error) {
+        console.error('Error adding comment:', error);
+      }
     }
   };
 
@@ -82,7 +90,6 @@ const BookDetails = () => {
 
   return (
     <div className="book-details">
-    {/* Add the BookDetailsHeader here, passing the title */}
       <BookDetailsHeader title={book.title} author={book.author} />
       {book.rating && <StarRating rating={book.rating} />}
       <div className="underline"></div>
@@ -115,7 +122,6 @@ const BookDetails = () => {
         {isBorrowed ? 'Already Borrowed' : 'Borrow'}
       </button>
       {message && <p>{message}</p>}
-
 
       <div className="comment-section">
         <h3>Comments</h3>
