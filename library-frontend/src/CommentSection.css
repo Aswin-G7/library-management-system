@@ -1,0 +1,64 @@
+/* src/components/CommentSection.css */
+#comments {
+    box-shadow: 0 -1px 6px 1px rgba(0,0,0,0.1);
+    background-color: #FFFFFF;
+    padding: 30px;
+}
+
+#comments h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+#comments .media {
+    border-top: 1px dashed #DDDDDD;
+    padding: 20px 0;
+    margin: 0;
+}
+
+#comments .media-body {
+    margin-left: 0;
+}
+
+#comments .media h4 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+#comments .media h4 span {
+    font-size: 14px;
+    float: right;
+    color: #999;
+}
+
+#comments .media p {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+#comments .media-detail {
+    margin: 0;
+    padding: 0;
+}
+
+#comments .media-detail li {
+    color: #AAAAAA;
+    font-size: 12px;
+    font-weight: 600;
+    padding-right: 10px;
+    display: inline;
+}
+
+#comments .media-detail button {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+}
+
+#comments .media-detail button:hover {
+    text-decoration: underline;
+}

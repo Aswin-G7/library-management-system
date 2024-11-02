@@ -12,7 +12,7 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log('MongoDB connected'))
-  .catch(err => console.log(err));
+  .catch(err => console.log("MongoDB connection error:", err));
 
 // Import user routes
 const { router: userRoutes } = require('./routes/auth');

@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import BookDetailsHeader from './BookDetailsHeader';
 import StarRating from './StarRating';
+import CommentSection from './CommentSection';
 import './BookDetails.css';
 
 const BookDetails = () => {
@@ -70,14 +71,22 @@ const BookDetails = () => {
     if (newComment.trim()) {
       try {
         await axios.post(`http://localhost:5000/api/comments/${id}`, {
-          user: user.firstName,
+          userName: user.firstName,
           text: newComment,
         });
 
-        setComments([...comments, { user: user.firstName, text: newComment }]);
+        // Include the createdAt date from the response or set it manually
+        const date = new Date(); // Set the date to now if not returned from API
+        const newCommentObject = {
+          userName: user.firstName,
+          text: newComment,
+          date: date.toISOString(), // Store the date in ISO format
+        };
+
+        setComments([...comments, newCommentObject]);
         setNewComment('');
       } catch (error) {
-        console.error('Error adding comment:', error);
+        console.error('Error adding comment:', error.response?.data || error.message); 
       }
     }
   };
@@ -125,16 +134,12 @@ const BookDetails = () => {
 
       <div className="comment-section">
         <h3>Comments</h3>
-        <div className="comments">
-          {comments.map((comment, index) => (
-            <p key={index}><strong>{comment.user}:</strong> {comment.text}</p>
-          ))}
-        </div>
+        <CommentSection comments={comments} />
         <input
-          type="text"
-          placeholder="Add a comment"
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
+        type="text"
+        placeholder="Add a comment"
+        value={newComment}
+        onChange={(e) => setNewComment(e.target.value)}
         />
         <button onClick={handleCommentSubmit}>Submit</button>
       </div>
