@@ -10,7 +10,6 @@ const CommentSection = ({ comments }) => {
           <div className="media-body">
             <h4 className="media-heading">
               {comment.userName}
-              <span>{new Date(comment.date).toLocaleDateString()}</span>
             </h4>
             <p>{comment.text}</p>
             <ul className="list-unstyled list-inline media-detail">

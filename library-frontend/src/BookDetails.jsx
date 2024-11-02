@@ -70,18 +70,23 @@ const BookDetails = () => {
   const handleCommentSubmit = async () => {
     if (newComment.trim()) {
       try {
-        await axios.post(`http://localhost:5000/api/comments/${id}`, {
+        const response = await axios.post(`http://localhost:5000/api/comments/${id}`, {
           userName: user.firstName,
           text: newComment,
         });
 
         // Include the createdAt date from the response or set it manually
-        const date = new Date(); // Set the date to now if not returned from API
+        //const date = new Date(); // Set the date to now if not returned from API
         const newCommentObject = {
           userName: user.firstName,
           text: newComment,
-          date: date.toISOString(), // Store the date in ISO format
+          date: response.data.date, // Store the date in ISO format
+          likes: response.data.likes || 0,
         };
+
+        // Add and sort comments by date
+        const updatedComments = [...comments, newCommentObject];
+        updatedComments.sort((a, b) => new Date(b.date) - new Date(a.date));
 
         setComments([...comments, newCommentObject]);
         setNewComment('');
