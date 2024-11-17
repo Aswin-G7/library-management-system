@@ -23,6 +23,12 @@ const commentSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  dislikes: {
+    type: Number,
+    default: 0,
+  },
+  likedBy: [{ type: String }], // Track rollNumbers who liked this comment
+  dislikedBy: [{ type: String }],
 });
 
 module.exports = mongoose.model('Comment', commentSchema);

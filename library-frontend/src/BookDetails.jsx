@@ -16,19 +16,16 @@ const BookDetails = () => {
   const user = JSON.parse(sessionStorage.getItem('user'));
 
   useEffect(() => {
-    // Fetch book details and comments on component mount
     const fetchBookAndComments = async () => {
       try {
         const bookResponse = await axios.get(`http://localhost:5000/api/books/${id}`);
         setBook(bookResponse.data);
 
-        // Check if the user has borrowed this book
         const userHasBorrowed = bookResponse.data.borrowedUsers?.some(
           (borrowedUser) => borrowedUser.rollNumber === user.rollNumber
         );
         setIsBorrowed(userHasBorrowed);
 
-        // Fetch comments for this book
         const commentsResponse = await axios.get(`http://localhost:5000/api/comments/${id}`);
         setComments(commentsResponse.data);
       } catch (error) {
@@ -59,7 +56,6 @@ const BookDetails = () => {
       setMessage(response.data.message);
       setIsBorrowed(true);
 
-      // Re-fetch book data to update the borrowed count
       const updatedBookResponse = await axios.get(`http://localhost:5000/api/books/${id}`);
       setBook(updatedBookResponse.data);
     } catch (error) {
@@ -75,23 +71,19 @@ const BookDetails = () => {
           text: newComment,
         });
 
-        // Include the createdAt date from the response or set it manually
-        //const date = new Date(); // Set the date to now if not returned from API
         const newCommentObject = {
+          _id: response.data._id,
           userName: user.firstName,
           text: newComment,
-          date: response.data.date, // Store the date in ISO format
+          date: response.data.date,
           likes: response.data.likes || 0,
+          userHasLiked: false,
         };
 
-        // Add and sort comments by date
-        const updatedComments = [...comments, newCommentObject];
-        updatedComments.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-        setComments([...comments, newCommentObject]);
+        setComments((prevComments) => [newCommentObject, ...prevComments]);
         setNewComment('');
       } catch (error) {
-        console.error('Error adding comment:', error.response?.data || error.message); 
+        console.error('Error adding comment:', error.response?.data || error.message);
       }
     }
   };
@@ -100,7 +92,9 @@ const BookDetails = () => {
     return <div>Book not found</div>;
   }
 
-  const coverImageUrl = book.coverImage.startsWith('http') ? book.coverImage : `http://localhost:5000${book.coverImage}`;
+  const coverImageUrl = book.coverImage.startsWith('http')
+    ? book.coverImage
+    : `http://localhost:5000${book.coverImage}`;
 
   return (
     <div className="book-details">
@@ -139,12 +133,15 @@ const BookDetails = () => {
 
       <div className="comment-section">
         <h3>Comments</h3>
-        <CommentSection comments={comments} />
+        <CommentSection 
+          initialComments={comments} 
+          bookId={id}
+        />
         <input
-        type="text"
-        placeholder="Add a comment"
-        value={newComment}
-        onChange={(e) => setNewComment(e.target.value)}
+          type="text"
+          placeholder="Add a comment"
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
         />
         <button onClick={handleCommentSubmit}>Submit</button>
       </div>

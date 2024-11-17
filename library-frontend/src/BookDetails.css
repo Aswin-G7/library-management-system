@@ -25,7 +25,7 @@
 .book-meta-left {
   display: flex;  /* Display the cover image and description side by side */
   flex: 1;
-  margin-right: 40px;
+  margin-right: 50px;
 }
 
 .book-meta-left img {
@@ -37,7 +37,7 @@
 }
 
 .book-description {
-  max-width: 560px;
+  max-width: 800px;
 }
 
 .book-description h2 {
@@ -47,15 +47,17 @@
 }
 
 .book-description p {
-  font-size: 18px;
+  font-size: 20px;
+  font-family:'Times New Roman', Times, serif;
+  width: 630px;
 }
 
 /* Right Section */
 .book-meta-right {
   flex: 0.5;
   border-left: 2px solid #89b8bc;
-  padding-left: 20px;
-  font-family: Copernicus, "Libre Baskerville", Georgia, serif
+  padding-left: 30px;
+  font-family: Copernicus, "Libre Baskerville", Georgia, serif;
 }
 
 .book-meta-right h2 {
@@ -65,7 +67,7 @@
 
 .book-meta-right p {
   margin-top: 0px;
-  font-size: 18px;
+  font-size: 20px;
 }
 
 .borrow-button {
