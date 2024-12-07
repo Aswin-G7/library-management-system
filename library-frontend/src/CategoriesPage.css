@@ -1,0 +1,60 @@
+.categories-page {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .categories-page h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #fefeff;
+  }
+  
+  .categories-title {
+    font-size: 32px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    padding: 40px;
+    background-image: url('/category-images/categories.jpg');
+    border-radius: 10px;
+    margin: 0; /* Removes any default margin */
+    position: relative; /* Allows positioning relative to the screen */
+    top: 0; /* Positions the element at the very top */
+    width: 1570px; /* Ensures it spans the full width of the screen */
+  }  
+  
+  
+  
+  .categories-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;  /* Space between the boxes */
+    justify-content: center;  /* Centers the items horizontally */
+  }
+  
+  .category-box {
+    background-size: cover;
+    background-position: center;
+    height: 220px;
+    width: 30%;  /* Each box takes up 30% of the container's width, which makes 3 items per row */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
+  }
+  
+  .category-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .category-name {
+    text-align: center;
+  }
+  

@@ -55,6 +55,9 @@ const Sidebar = ({ isOpen, toggleSidebar, categories, selectCategory }) => {
             ))}
           </ul>
         )}
+        <li>
+          <Link to="/test" onClick={toggleSidebar}>TEST</Link>
+        </li>
       </ul>
     </div>
   );

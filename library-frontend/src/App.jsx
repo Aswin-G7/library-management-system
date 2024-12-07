@@ -12,7 +12,7 @@ import BorrowedUsersPage from './BorrowedUsersPage';
 import AddBookPage from './AddBookPage';
 import RemoveBookPage from './RemoveBookPage';
 import FinesPage from './FinesPage';
-import BookDetailsHeader from './BookDetailsHeader';
+import CategoriesPage from './CategoriesPage'; // Import the new CategoriesPage component
 
 import './App.css';
 
@@ -23,7 +23,7 @@ const categories = [
   'Art',
   'Biography',
   'Business',
-  "Children's",
+  'Children',
   'Christian',
   'Classics',
   'Comics',
@@ -107,7 +107,7 @@ const App = () => {
   }
 
   // Determine which header to display based on the route
-  const showHeader = location.pathname.startsWith('/book/') || location.pathname.startsWith('/admin')
+  const showHeader = location.pathname.startsWith('/book/') || location.pathname.startsWith('/admin') || location.pathname.startsWith('/test')
   ? null
   : <Header toggleSidebar={toggleSidebar} handleLogout={handleLogout} isAuthenticated={isAuthenticated} />;
   
@@ -137,6 +137,9 @@ const App = () => {
 
           {/* Fines route */}
           <Route path="/fines" element={isAuthenticated ? <FinesPage /> : <Navigate to="/login" />} />
+
+          {/* Test Page Route */}
+          <Route path="/test" element={<CategoriesPage categories={categories} />} />
 
           <Route
             path="/*"
