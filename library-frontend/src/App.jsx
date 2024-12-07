@@ -107,9 +107,10 @@ const App = () => {
   }
 
   // Determine which header to display based on the route
-  const showHeader = location.pathname.startsWith('/book/')
+  const showHeader = location.pathname.startsWith('/book/') || location.pathname.startsWith('/admin')
   ? null
   : <Header toggleSidebar={toggleSidebar} handleLogout={handleLogout} isAuthenticated={isAuthenticated} />;
+  
 
   return (
       <div className="App">

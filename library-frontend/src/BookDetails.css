@@ -132,7 +132,8 @@
 }
 
 .comment-section input[type="text"] {
-  width: 80%;
+  width: 1283px;
+  height: 50px;
   padding: 8px;
   margin-right: 10px;
   border-radius: 4px;
