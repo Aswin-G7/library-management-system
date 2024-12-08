@@ -10,7 +10,7 @@ import AddBookPage from './AddBookPage';
 import RemoveBookPage from './RemoveBookPage'; // Import the new component
 import Header from './Header';
 
-const MainContent = ({ books, searchTerm, handleSearch }) => {
+const MainContent = ({ books, searchTerm, handleSearch, selectedCategory }) => {
   const location = useLocation();
 
     // Get the book title based on the current route
@@ -21,21 +21,20 @@ const MainContent = ({ books, searchTerm, handleSearch }) => {
     const bookTitle = currentBook ? currentBook.title : ''; // Get the title or set to an empty string
     //console.log(bookTitle);
 
+   // Filter books based on the selected category
+  const filteredBooks = books.filter(book => {
+    return !selectedCategory || book.genre === selectedCategory; // Display all books if no category is selected
+  });
+
   return (
     <div className="content">
+      {/* Show search bar only on the main page */}
       {location.pathname === '/' && (
         <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
       )}
 
-      {/* Conditionally render the BookDetailsHeader for BookDetails page */}
-      {/* {location.pathname === `/book/${bookId}` ? ( 
-        <BookDetailsHeader title={bookTitle} />
-      ) : (
-        null
-      )} */}
-
       <Routes>
-        <Route path="/" element={<BookList books={books} />} />
+        <Route path="/" element={<BookList books={filteredBooks} />} />
         <Route path="/book/:id" element={<BookDetails books={books} />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/admin/add-book" element={<AddBookPage />} />

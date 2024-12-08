@@ -1,0 +1,180 @@
+/* src/pages/HomePage.css */
+
+.home-container {
+    font-family: Arial, sans-serif;
+    color: #333;
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+  }
+  
+  /* Section Styles */
+  section {
+    margin-bottom: 40px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Heading Styles */
+  h1, h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #4CAF50; /* Color for the headings */
+  }
+  
+  h1 {
+    font-size: 3rem; /* Larger font size for "About Us" */
+  }
+  
+  /* Paragraph Styles */
+  p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: #555;
+  }
+  
+  /* List Styles */
+  ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    font-size: 1.2rem;
+  }
+  
+  li {
+    margin-bottom: 10px;
+  }
+  
+  /* Button Styles */
+  button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Button Styles for Custom Buttons */
+  .box-1, .box-2, .box-3 {
+    height: 33.33%;
+    width: 15%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .box-1 {
+    background-color: #FF6766;
+  }
+  
+  .box-2 {
+    background-color: #3C3C3C;
+  }
+  
+  .box-3 {
+    background-color: #66A182;
+  }
+  
+  .btn {
+    line-height: 50px;
+    height: 50px;
+    text-align: center;
+    width: 250px;
+    cursor: pointer;
+  }
+  
+  /* BUTTON THREE (As per your template) */
+  .btn-three {
+    color: #FFF;
+    transition: all 0.5s;
+    position: relative;
+  }
+  
+  .btn-three::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s;
+  }
+  
+  .btn-three:hover::before {
+    opacity: 0;
+    transform: scale(0.5, 0.5);
+  }
+  
+  .btn-three::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0;
+    transition: all 0.3s;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transform: scale(1.2, 1.2);
+  }
+  
+  .btn-three:hover::after {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+  
+  /* Custom Styles for Individual Sections */
+  .about-us {
+    background-color: #e3f2fd;
+  }
+  
+  .see-books {
+    background-color: #fff3e0;
+  }
+  
+  .categories {
+    background-color: #f1f8e9;
+  }
+  
+  .contact {
+    background-color: #fce4ec;
+  }
+  
+  /* Ensure the page content is responsive */
+  @media (max-width: 768px) {
+    .home-container {
+      padding: 10px;
+    }
+  
+    h1, h2 {
+      font-size: 1.8rem;
+    }
+  
+    p, ul, li {
+      font-size: 1rem;
+    }
+  
+    button {
+      width: 100%;
+      font-size: 1.1rem;
+    }
+  
+    /* Ensure buttons are responsive too */
+    .btn {
+      width: 50%;
+    }
+  }
+  

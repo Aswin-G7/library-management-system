@@ -1,6 +1,6 @@
 import './CategoriesPage.css';
 
-const CategoriesPage = ({ categories }) => {
+const CategoriesPage = ({ categories, selectCategory  }) => {
   return (
     <div className="categories-page">
       <h2 className="categories-title">Categories</h2>
@@ -12,6 +12,7 @@ const CategoriesPage = ({ categories }) => {
             style={{
               backgroundImage: `url(/category-images/${category.toLowerCase()}.webp), url(/category-images/${category.toLowerCase()}.avif), url(/category-images/${category.toLowerCase()}.jpg), url(/category-images/${category.toLowerCase()}.png), url(/category-images/${category.toLowerCase()}.jpeg)`,
             }}
+            onClick={() => selectCategory(category)} // Call the selectCategory function on click
           >
             <span className="category-name">{category}</span>
           </div>

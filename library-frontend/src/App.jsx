@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
+import { Route, Routes, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';  
 import Header from './Header';
 import Sidebar from './Sidebar';
@@ -13,6 +13,7 @@ import AddBookPage from './AddBookPage';
 import RemoveBookPage from './RemoveBookPage';
 import FinesPage from './FinesPage';
 import CategoriesPage from './CategoriesPage'; // Import the new CategoriesPage component
+import HomePage from './HomePage'; // Adjust path if needed
 
 import './App.css';
 
@@ -41,6 +42,7 @@ const App = () => {
   const [loading, setLoading] = useState(true); 
   
   const location = useLocation(); // Get the current location
+  const navigate = useNavigate(); // Add useNavigate here
 
   useEffect(() => {
     const token = sessionStorage.getItem('authToken');
@@ -84,6 +86,7 @@ const App = () => {
   const selectCategory = (category) => {
     setSelectedCategory(category);
     setIsSidebarOpen(false);
+    navigate('/'); 
   };
 
   const handleLogin = () => {
@@ -123,6 +126,9 @@ const App = () => {
           selectCategory={selectCategory}
         />
         <Routes>
+          {/* Define the route for the homepage */}
+          <Route path="/home" element={<HomePage />} />
+
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
 
@@ -139,7 +145,7 @@ const App = () => {
           <Route path="/fines" element={isAuthenticated ? <FinesPage /> : <Navigate to="/login" />} />
 
           {/* Test Page Route */}
-          <Route path="/test" element={<CategoriesPage categories={categories} />} />
+          <Route path="/test" element={<CategoriesPage categories={categories} selectCategory={selectCategory} />} />
 
           <Route
             path="/*"
@@ -149,6 +155,7 @@ const App = () => {
                   books={filteredBooks}
                   searchTerm={searchTerm}
                   handleSearch={handleSearch}
+                  selectedCategory={selectedCategory} // Pass selectedCategory
                 />
               ) : (
                 <Navigate to="/login" />
