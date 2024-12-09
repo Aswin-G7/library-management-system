@@ -9,6 +9,13 @@ html, body, #root {
 .App {
   font-family: Arial, sans-serif;
   background-color: antiquewhite;
+  background-image: url('/main-bg/whole-bg.avif'); /* Replace with the path to your image */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed; /* This keeps the background static */
+  
+  min-height: 100vh; /* Ensures the background covers the entire page */
 }
 
 .content {

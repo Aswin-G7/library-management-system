@@ -127,7 +127,7 @@ const App = () => {
         />
         <Routes>
           {/* Define the route for the homepage */}
-          <Route path="/home" element={<HomePage />} />
+          <Route path="/home" element={isAuthenticated ? <HomePage /> : <Navigate to="/login" />} />
 
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />

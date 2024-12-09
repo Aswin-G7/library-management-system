@@ -1,7 +1,13 @@
-import React from 'react';
-import './HomePage.css'; // Make sure you import the CSS file
+import { useNavigate } from 'react-router-dom';
+import './HomePage.css';
 
 const HomePage = () => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
+
   return (
     <div className="home-container">
       {/* About Us Section */}
@@ -25,10 +31,11 @@ const HomePage = () => {
           perfect for students and researchers. Whether you want to dive into the world of literature or enhance your knowledge in a specific field, 
           you’ll find the right book here.
         </p>
-        <div className="box-1">
-          <div className="btn btn-three">
-            <span>See Books</span>
-          </div>
+        <div className="btn" onClick={() => handleNavigation('/')}>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 60">
+            <rect x="0" y="0" width="180" height="60" fill="none"></rect>
+          </svg>
+          <span>See Books</span>
         </div>
       </section>
 
@@ -51,14 +58,31 @@ const HomePage = () => {
           <li>Children’s Books</li>
           <li>History & Politics</li>
         </ul>
-        <p>
-          This extensive categorization makes it easier for you to find your next great read. Whether you’re looking to escape into a fantasy world or 
-          learn more about the world around you, you’ll find the perfect book here.
-        </p>
-        <button className="categories-button">Explore Categories</button>
+        <div className="btn" onClick={() => handleNavigation('/test')}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="180px" height="60px">
+            <rect x="0" y="0" fill="none" width="180" height="60"></rect>
+          </svg>
+          <span>Explore Categories</span>
+        </div>
       </section>
 
-      {/* Contact Section (optional) */}
+      {/* See Borrowed Books Section */}
+      <section className="borrowed-books">
+        <h2>See What You’ve Borrowed</h2>
+        <p>
+          Curious about the books you've borrowed? We've made it easy for you to track your borrowed items in one place. 
+          With a single click, you can view your borrowed book history, due dates, and even the fines associated with overdue books. 
+          Stay organized and never lose track of your reading journey!
+        </p>
+        <div className="btn" onClick={() => handleNavigation('/borrowed-books')}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="180px" height="60px">
+            <rect x="0" y="0" fill="none" width="180" height="60"></rect>
+          </svg>
+          <span>View Borrowed Books</span>
+        </div>
+      </section>
+
+      {/* Contact Section */}
       <section className="contact">
         <h2>Contact Us</h2>
         <p>

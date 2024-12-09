@@ -1,5 +1,5 @@
 .book-details {
-  max-width: 1300px;
+  width: 95%;
   margin: 0 auto;
   padding: 20px;
 }
@@ -8,6 +8,19 @@
   font-family: Copernicus, "Libre Baskerville", Georgia, serif;
   text-align: center;
 }
+
+.book-details h2 {
+  font-family: Copernicus, "Libre Baskerville", Georgia, serif;
+  text-align: center;
+  color: #f8f8f8;
+}
+
+.book-details p {
+  color: #cbc9c9; /* Replace with your desired color */
+  font-size: 18px; /* Adjust font size if needed */
+  line-height: 1.6; /* Adjust line height for better readability */
+}
+
 
 .underline {
   width: 100%;
@@ -54,10 +67,12 @@
 
 /* Right Section */
 .book-meta-right {
-  flex: 0.5;
+  flex: 0 1 600px;
+  width: 100%;
   border-left: 2px solid #89b8bc;
   padding-left: 30px;
   font-family: Copernicus, "Libre Baskerville", Georgia, serif;
+  max-width: 800px;
 }
 
 .book-meta-right h2 {
@@ -68,6 +83,9 @@
 .book-meta-right p {
   margin-top: 0px;
   font-size: 20px;
+  line-height: 1.6;  /* Adjust line height to control text flow */
+  max-width: 700px; /* Ensure text stretches within the parent container */
+  word-wrap: break-word;
 }
 
 .borrow-button {
@@ -114,6 +132,10 @@
   margin-top: 15px;
 }
 
+.borrow-count {
+  color: #d7dbdf;
+  font-size: 1.6em;
+}
 
 .comment-section {
   margin-top: 20px;
@@ -122,6 +144,9 @@
 .comment-section h3 {
   font-family: Copernicus, "Libre Baskerville", Georgia, serif;
   margin-bottom: 10px;
+  color: #d1d4d7;
+  padding-top: 60px;
+  font-size: 1.5em;
 }
 
 .comments {
@@ -132,17 +157,19 @@
 }
 
 .comment-section input[type="text"] {
-  width: 1283px;
+  width: 1550px;
   height: 50px;
   padding: 8px;
   margin-right: 10px;
   border-radius: 4px;
   border: 1px solid #ccc;
+  background-color: transparent;
+  color: aliceblue;
 }
 
 .comment-section button {
   padding: 8px 12px;
-  font-size: 14px;
+  font-size: 17px;
   background-color: #007bff;
   color: white;
   border: none;

@@ -15,6 +15,7 @@ mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopol
   .catch(err => console.log("MongoDB connection error:", err));
 
 // Import user routes
+const { protect } = require('./routes/auth'); // Protect middleware
 const { router: userRoutes } = require('./routes/auth');
 const bookRoutes = require('./routes/book'); // Book routes
 const finesRoutes = require('./routes/fines'); // Fines routes
@@ -27,6 +28,13 @@ app.use('/api/books', bookRoutes);   // Book routes
 app.use('/api/fines', finesRoutes);   // Fines routes
 app.use('/api/comments', commentRoutes); // Comments routes
 
+// Protect the homepage route
+app.get('/home', protect, async (req, res) => {
+  res.status(200).json({
+    message: `Welcome to the homepage, ${req.user.firstName}!`,
+    user: req.user, // Include user details in the response if needed
+  });
+});
 
 app.get('/api/books', async (req, res) => {
   try {

@@ -101,7 +101,7 @@ const BookDetails = () => {
       <BookDetailsHeader title={book.title} author={book.author} />
       {book.rating && <StarRating rating={book.rating} />}
       <div className="underline"></div>
-      <div className="book-info">
+      <div className="book-info"> 
         <div className="book-meta-left">
           <div className="book-image">
             <img src={coverImageUrl} alt={book.title} />
@@ -120,7 +120,7 @@ const BookDetails = () => {
         </div>
       </div>
 
-      <h3>Number of Borrows: {book.borrowedCount}</h3>
+      <h3 className='borrow-count'>Number of Borrows: {book.borrowedCount}</h3>
 
       <button 
         className="borrow-button" 

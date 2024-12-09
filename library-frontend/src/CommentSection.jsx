@@ -70,7 +70,7 @@ const CommentSection = ({ initialComments, bookId }) => {
         <div className="media" key={comment._id}>
           <div className="media-body">
             <h4 className="media-heading">{comment.userName}</h4>
-            <p>{comment.text}</p>
+            <p className='comment-text'>{comment.text}</p>
             <ul className="list-unstyled list-inline media-detail">
               <li>
                 <i className="fas fa-calendar"></i>{' '}
