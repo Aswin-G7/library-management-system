@@ -63,6 +63,7 @@
   font-size: 20px;
   font-family:'Times New Roman', Times, serif;
   width: 630px;
+  color: #ffffff !important; /* Force text color to white */
 }
 
 /* Right Section */
@@ -86,6 +87,7 @@
   line-height: 1.6;  /* Adjust line height to control text flow */
   max-width: 700px; /* Ensure text stretches within the parent container */
   word-wrap: break-word;
+  color: #ffffff !important; /* Make sure this text is also white */
 }
 
 .borrow-button {
@@ -133,7 +135,7 @@
 }
 
 .borrow-count {
-  color: #d7dbdf;
+  color: #89d98c;
   font-size: 1.6em;
 }
 

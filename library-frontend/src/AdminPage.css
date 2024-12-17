@@ -6,7 +6,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 0px;
+
+  /* Add background image */
+  background-image: url('/main-bg/admin-bg.jpg'); /* Replace with your image path */
+  background-size: cover; /* Ensures the image covers the entire background */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+  background-attachment: fixed; /* Keep the background fixed during scrolling */
 }
 
 .admin-header {
@@ -23,6 +30,7 @@
 .admin-header h1 {
   padding-left: 40%;
   align-items: center;
+  color: #ffffff;
 }
 
 .logout-button {
@@ -33,6 +41,7 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-right: 20px;
 }
 
 .logout-button:hover {

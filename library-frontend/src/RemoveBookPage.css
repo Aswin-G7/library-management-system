@@ -1,6 +1,17 @@
 /* src/RemoveBookPage.css */
 .remove-book-page {
     padding: 20px;
+    background-image: url('/main-bg/admin-bg.jpg'); /* Set the background image */
+    background-size: cover; /* Ensure the image covers the entire container */
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-attachment: fixed; /* Keep the background fixed during scrolling */
+    padding: 40px; /* Optional: You can add padding to control spacing */
+    min-height: 100vh; /* Ensure the container takes up the full viewport height */
+  }
+
+  .remove-book-page h2 {
+    color: #3f3f3f;
   }
   
   .book-list {
@@ -17,7 +28,11 @@
   
   
   .book-details {
-    margin-left: 10px;
+    margin-left: -9px;
+  }
+
+  .book-details p{
+    color: #0f0f0f;
   }
   
   .remove-book-page .delete-button {

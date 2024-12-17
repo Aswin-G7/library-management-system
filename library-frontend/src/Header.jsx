@@ -1,4 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
+import AnimatedButton from './AnimatedButton';
 import './Header.css';
 
 const Header = ({ toggleSidebar, handleLogout, isAuthenticated }) => {
@@ -21,9 +22,7 @@ const Header = ({ toggleSidebar, handleLogout, isAuthenticated }) => {
       <h1>“The only thing you absolutely have to know is the location of the library.”</h1>
       <h1>– Albert Einstein</h1>
       {showLogout && (
-        <button className="logout-btn" onClick={onLogout}>
-          Logout
-        </button>
+        <AnimatedButton text="Logout" onClick={onLogout} />
       )}
     </header>
   );

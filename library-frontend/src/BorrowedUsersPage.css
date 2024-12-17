@@ -1,26 +1,46 @@
 .borrowed-users-page {
   padding: 20px;
+  font-family: Arial, sans-serif;
+  background-image: url('/main-bg/admin-bg.jpg'); /* Set the background image */
+  background-size: cover; /* Ensure the image covers the entire container */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+  background-attachment: fixed; /* Keep the background fixed during scrolling */
+  padding: 40px; /* Optional: You can add padding to control spacing */
+  min-height: 100vh; /* Ensure the container takes up the full viewport height */
+}
+
+.borrowed-users-page h2 {
+  color: #3f3f3f;
 }
 
 .borrowed-users-container {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column; /* Display users in a single column */
   gap: 20px;
+  align-items: center; /* Center-align the user boxes */
 }
 
 .user-box {
-  border: 1px solid #ccc;
+  width: 100%;
+  max-width: 600px; /* Limit the width for better readability */
+  border: 1px solid #ddd;
   border-radius: 10px;
   padding: 20px;
-  width: 300px;
   background-color: #f9f9f9;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s; /* Add a hover effect */
+}
+
+.user-box:hover {
+  transform: scale(1.02); /* Slightly enlarge the box on hover */
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* Intensify the shadow on hover */
 }
 
 .user-box p {
   margin: 10px 0;
   font-size: 16px;
-  line-height: 1.5;
+  color: #333;
 }
 
 .user-name {
@@ -41,11 +61,20 @@
   background-color: #28a745;
   color: white;
   border: none;
-  padding: 8px 12px;
+  padding: 10px 12px;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.2s;
 }
 
 .return-button:hover {
   background-color: #218838;
+}
+
+.no-users-message {
+  font-size: 18px;
+  font-weight: bold;
+  color: #666;
+  text-align: center;
+  margin-top: 40px;
 }

@@ -1,6 +1,6 @@
 /* In your CSS file (e.g., BookDetailsHeader.css) */
 .book-details-header {
-    background-color: #512b10; /* Light background for contrast */
+    background-color: transparent; /* Light background for contrast */
     color: #333; /* Dark text for readability */
     /* padding: 1.5rem; Adds spacing around the content */
     padding: 40px;

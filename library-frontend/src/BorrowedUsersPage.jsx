@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
+import SearchBar from './SearchBar';
 import './BorrowedUsersPage.css'; // For styling the boxes
 
 const BorrowedUsersPage = () => {
   const [borrowedUsers, setBorrowedUsers] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchBorrowedUsers = async () => {
@@ -25,6 +27,10 @@ const BorrowedUsersPage = () => {
     fetchBorrowedUsers();
   }, []);
 
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value); // Update search term as user types
+  };
+
   const formatDate = (dateString) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(dateString).toLocaleDateString(undefined, options);
@@ -37,7 +43,11 @@ const BorrowedUsersPage = () => {
       });
       
       // Update the frontend to reflect the change
-      setBorrowedUsers(prevUsers => prevUsers.filter(user => user.rollNumber !== rollNumber || user.bookId !== bookId));
+      setBorrowedUsers(prevUsers => 
+        prevUsers.filter(
+          (user) => user.rollNumber !== rollNumber || user.bookId !== bookId
+        )
+      );
       alert('Book returned successfully');
     } catch (error) {
       console.error('Error returning book:', error);
@@ -45,12 +55,23 @@ const BorrowedUsersPage = () => {
     }
   };
 
+  // Filter users based on search term (case-insensitive)
+  const filteredUsers = borrowedUsers.filter((user) =>
+    `${user.firstName} ${user.lastName}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.bookTitle.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    user.rollNumber.toString().includes(searchTerm)
+  );
+
   return (
     <div className="borrowed-users-page">
       <h2>Borrowed Users</h2>
+
+      {/* Search Bar */}
+      <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
+
       <div className="borrowed-users-container">
-        {borrowedUsers.length > 0 ? (
-          borrowedUsers.map((user, index) => (
+        {filteredUsers.length > 0 ? (
+          filteredUsers.map((user, index) => (
             <div key={index} className="user-box">
               <p className="user-name">Name: {user.firstName} {user.lastName}</p>
               <p className="user-roll">Roll Number: {user.rollNumber}</p>
@@ -65,7 +86,7 @@ const BorrowedUsersPage = () => {
             </div>
           ))
         ) : (
-          <p>No users have borrowed books yet</p>
+          <p className="no-users-message">No users have borrowed books yet</p>
         )}
       </div>
     </div>

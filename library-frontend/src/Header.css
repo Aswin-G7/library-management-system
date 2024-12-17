@@ -1,12 +1,13 @@
 /* src/Header.css */
 .header {
-  background-color: #512b10;
+  background-color: transparent;
   color: white;
   padding: 10px;
   text-align: center;
   position: relative;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  border-bottom: 2px solid #ecf0f1;
 }
 
 .header h1 {
@@ -35,26 +36,16 @@
   color: #bdc3c7;
 }
 
-.logout-btn {
-  background-color: #e74c3c;
-  color: #ecf0f1;
-  padding: 10px 16px;
-  border: none;
-  cursor: pointer;
-  position: absolute;
-  border-radius: 20px;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: background-color 0.3s, box-shadow 0.3s;
+.animated-button-container {
+  position: absolute; 
+  top: 30px; /* 10px from the top */
+  right: 30px; /* 20px from the right */
 }
 
-.logout-btn:hover {
-  background-color: #c0392b;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
+
+
+
+
 
 
 

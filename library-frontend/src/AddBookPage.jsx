@@ -49,56 +49,58 @@ const AddBookPage = () => {
   };
 
   return (
-    <div className="add-book-page">
-      <h2>Add a New Book</h2>
-      <form onSubmit={handleSubmit} className="admin-form">
-        <label>
-          Title:
-          <br />
-          <input type="text" name="title" value={book.title} onChange={handleChange} required />
-        </label>
-        <label>
-          Author:
-          <br />
-          <input type="text" name="author" value={book.author} onChange={handleChange} required />
-        </label>
-        <label>
-          Cover Image URL:
-          <br />
-          <input type="text" name="coverImage" value={book.coverImage} onChange={handleChange} required />
-        </label>
-        <label>
-          Genre:
-          <br />
-          <select name="genre" value={book.genre} onChange={handleChange} required>
-            <option value="" disabled>Select a genre</option>
-            {genres.map((genre) => (
-              <option key={genre} value={genre}>{genre}</option>
-            ))}
-          </select>
-        </label>
-        <label>
-          Rating:
-          <br />
-          <input type="number" name="rating" value={book.rating} onChange={handleChange} min="0" max="5" step="0.1" required />
-        </label>
-        <label>
-          Description:
-          <br />
-          <textarea name="description" value={book.description} onChange={handleChange} required />
-        </label>
-        <label>
-          Author Bio:
-          <br />
-          <textarea name="authorBio" value={book.authorBio} onChange={handleChange} />
-        </label>
-        <label>
-          Location in Library:
-          <br />
-          <input type="text" name="location" value={book.location} onChange={handleChange} />
-        </label>
-        <button type="submit">Add Book</button>
-      </form>
+    <div className="add-book-page-container">
+      <h2 className="page-heading">Add a New Book</h2>
+      <div className="add-book-page">
+        <form onSubmit={handleSubmit} className="admin-form">
+          <label>
+            Title:
+            <br />
+            <input type="text" name="title" value={book.title} onChange={handleChange} required />
+          </label>
+          <label>
+            Author:
+            <br />
+            <input type="text" name="author" value={book.author} onChange={handleChange} required />
+          </label>
+          <label>
+            Cover Image URL:
+            <br />
+            <input type="text" name="coverImage" value={book.coverImage} onChange={handleChange} required />
+          </label>
+          <label className='genre'>
+            Genre:
+            <br />
+            <select name="genre" value={book.genre} onChange={handleChange} required>
+              <option value="" disabled>Select a genre</option>
+              {genres.map((genre) => (
+                <option key={genre} value={genre}>{genre}</option>
+              ))}
+            </select>
+          </label>
+          <label>
+            Rating:
+            <br />
+            <input type="number" name="rating" value={book.rating} onChange={handleChange} min="0" max="5" step="0.1" required />
+          </label>
+          <label>
+            Description:
+            <br />
+            <textarea name="description" value={book.description} onChange={handleChange} required />
+          </label>
+          <label>
+            Author Bio:
+            <br />
+            <textarea name="authorBio" value={book.authorBio} onChange={handleChange} />
+          </label>
+          <label>
+            Location in Library:
+            <br />
+            <input type="text" name="location" value={book.location} onChange={handleChange} />
+          </label>
+          <button type="submit">Add Book</button>
+        </form>
+      </div>
     </div>
   );
 };

@@ -108,7 +108,7 @@ const BookDetails = () => {
           </div>
           <div className="book-description">
             <h2>Description</h2>
-            <p>{book.description}</p>
+            <p className='para'>{book.description}</p>
           </div>
         </div>
 
